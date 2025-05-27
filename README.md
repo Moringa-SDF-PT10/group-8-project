@@ -1,1 +1,1 @@
-## Group Travel Planner
+# Group Travel Planner
