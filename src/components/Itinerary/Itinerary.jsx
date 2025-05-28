@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-//import ItineraryItem from './ItineraryItem';
-//import AddItineraryItemForm from './AddItineraryItemForm';
+import ItineraryItem from './ItineraryItem';
+import AddItineraryItemForm from './AddItineraryItemForm';
+import localActivities from '../../data/activities.json';
 
 
 function Itinerary ({ tripId }) {
@@ -24,7 +25,9 @@ function Itinerary ({ tripId }) {
         setActivities(data.activities || []);
 
       } catch (err) {
-        setError(err.message);
+        console.warn('Using local data due to error:', err.message);
+        setActivities(localActivities);
+        setError(null);
       }  finally {
         setLoading(false);
       }    
