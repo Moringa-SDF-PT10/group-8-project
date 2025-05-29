@@ -1,62 +1,164 @@
-[
-  {
-    "id": 1,
-    "name": "Visit Nairobi National Park, Giraffe Centre, and Karen Blixen Museum",
-    "time": "09:00",
-    "description": "Day 1 - Nairobi"
-  },
-  {
-    "id": 2,
-    "name": "Boat ride on Lake Naivasha and a walking safari on Crescent Island",
-    "time": "10:00",
-    "description": "Day 2 - Naivasha"
-  },
-  {
-    "id": 3,
-    "name": "Game drive and cultural visit to Maasai village",
-    "time": "08:00",
-    "description": "Day 3 - Maasai Mara"
-  },
-  {
-    "id": 4,
-    "name": "Morning balloon safari and wildlife photography",
-    "time": "06:00",
-    "description": "Day 4 - Maasai Mara"
-  },
-  {
-    "id": 5,
-    "name": "Shopping at Maasai Market and prepare for coastal trip",
-    "time": "11:00",
-    "description": "Day 5 - Nairobi"
-  },
-  {
-    "id": 6,
-    "name": "Arrive and tour Fort Jesus, Old Town, and Mombasa Tusks",
-    "time": "12:00",
-    "description": "Day 6 - Mombasa"
-  },
-  {
-    "id": 7,
-    "name": "Spend the day at Haller Park and visit Bombolulu Workshops",
-    "time": "09:30",
-    "description": "Day 7 - Mombasa"
-  },
-  {
-    "id": 8,
-    "name": "Beach relaxation, snorkeling, and camel ride on the beach",
-    "time": "10:00",
-    "description": "Day 8 - Diani"
-  },
-  {
-    "id": 9,
-    "name": "Visit Colobus Conservation Centre and explore Shimba Hills",
-    "time": "08:30",
-    "description": "Day 9 - Diani"
-  },
-  {
-    "id": 10,
-    "name": "Return to Nairobi and depart",
-    "time": "07:00",
-    "description": "Day 10 - Nairobi"
-  }
-]
+{
+  "itinerary": [
+    {
+      "id": 1,
+      "name": "Visit Nairobi National Park, Giraffe Centre, and Karen Blixen Museum",
+      "time": "09:00",
+      "description": "Explore key attractions in Nairobi.",
+      "day": 1,
+      "location": "Nairobi"
+    },
+    {
+      "id": 2,
+      "name": "Boat ride on Lake Naivasha and a walking safari on Crescent Island",
+      "time": "10:00",
+      "description": "Wildlife experience and lake adventure.",
+      "day": 2,
+      "location": "Naivasha"
+    },
+    {
+      "id": 3,
+      "name": "Game drive and cultural visit to Maasai village",
+      "time": "08:00",
+      "description": "Experience the Maasai culture and wildlife.",
+      "day": 3,
+      "location": "Maasai Mara"
+    },
+    {
+      "id": 4,
+      "name": "Morning balloon safari and wildlife photography",
+      "time": "06:00",
+      "description": "Aerial wildlife viewing and scenic sunrise shots.",
+      "day": 4,
+      "location": "Maasai Mara"
+    },
+    {
+      "id": 5,
+      "name": "Shopping at Maasai Market and prepare for coastal trip",
+      "time": "11:00",
+      "description": "Buy souvenirs and plan your coastal journey.",
+      "day": 5,
+      "location": "Nairobi"
+    },
+    {
+      "id": 6,
+      "name": "Arrive and tour Fort Jesus, Old Town, and Mombasa Tusks",
+      "time": "12:00",
+      "description": "Dive into Mombasa's rich Swahili history.",
+      "day": 6,
+      "location": "Mombasa"
+    },
+    {
+      "id": 7,
+      "name": "Spend the day at Haller Park and visit Bombolulu Workshops",
+      "time": "09:30",
+      "description": "Nature and community-based tourism.",
+      "day": 7,
+      "location": "Mombasa"
+    },
+    {
+      "id": 8,
+      "name": "Beach relaxation, snorkeling, and camel ride on the beach",
+      "time": "10:00",
+      "description": "Relax on white sands and enjoy water sports.",
+      "day": 8,
+      "location": "Diani"
+    },
+    {
+      "id": 9,
+      "name": "Visit Colobus Conservation Centre and explore Shimba Hills",
+      "time": "08:30",
+      "description": "Conservation education and forest exploration.",
+      "day": 9,
+      "location": "Diani"
+    },
+    {
+      "id": 10,
+      "name": "Return to Nairobi and depart",
+      "time": "07:00",
+      "description": "End of your Kenyan adventure.",
+      "day": 10,
+      "location": "Nairobi"
+    },
+    {
+      "id": 11,
+      "name": "Hike Mt. Longonot",
+      "time": "07:00",
+      "description": "Enjoy the scenic crater rim hike.",
+      "day": 2,
+      "location": "Naivasha"
+    },
+    {
+      "id": 12,
+      "name": "Relax at Lake Elementaita",
+      "time": "13:00",
+      "description": "Birdwatching and lakeside picnic.",
+      "day": 2,
+      "location": "Naivasha"
+    },
+    {
+      "id": 13,
+      "name": "Dine at Carnivore Restaurant",
+      "time": "19:00",
+      "description": "Try Kenya's famous nyama choma.",
+      "day": 1,
+      "location": "Nairobi"
+    },
+    {
+      "id": 14,
+      "name": "Beach BBQ Dinner",
+      "time": "19:30",
+      "description": "Fresh seafood under the stars.",
+      "day": 8,
+      "location": "Diani"
+    },
+    {
+      "id": 15,
+      "name": "Nature walk in Arabuko Sokoke Forest",
+      "time": "08:00",
+      "description": "Guided walk in Kenya's coastal forest.",
+      "day": 9,
+      "location": "Watamu"
+    },
+    {
+      "id": 16,
+      "name": "Glass Bottom Boat Tour",
+      "time": "10:30",
+      "description": "Coral reef viewing from a boat.",
+      "day": 8,
+      "location": "Diani"
+    },
+    {
+      "id": 17,
+      "name": "Explore Nairobi Railway Museum",
+      "time": "11:00",
+      "description": "Historic locomotives and rail heritage.",
+      "day": 1,
+      "location": "Nairobi"
+    },
+    {
+      "id": 18,
+      "name": "Zip lining at Kereita Forest",
+      "time": "14:00",
+      "description": "Adrenaline-packed forest adventure.",
+      "day": 3,
+      "location": "Aberdare"
+    },
+    {
+      "id": 19,
+      "name": "Camel Ride on Malindi Beach",
+      "time": "09:30",
+      "description": "A fun morning ride on the beach.",
+      "day": 7,
+      "location": "Malindi"
+    },
+    {
+      "id": 20,
+      "name": "Sunset Cruise at Mida Creek",
+      "time": "17:00",
+      "description": "Beautiful sunset on a dhow boat.",
+      "day": 9,
+      "location": "Watamu"
+    }
+  ]
+}
