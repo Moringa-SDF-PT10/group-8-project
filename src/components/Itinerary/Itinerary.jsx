@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ItineraryItem from './ItineraryItem';
 import AddItineraryItemForm from './AddItineraryItemForm';
-import localActivities from '../../data/activities.json';
-
 
 function Itinerary ({ tripId }) {
-
   const [activities, setActivities] = useState ([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -15,58 +12,100 @@ function Itinerary ({ tripId }) {
       try {
         setLoading(true);
         setError(null);
-        const res = await fetch('https://api.jsonbin.io/v3/b/683762448561e97a501cbdab');
 
-        if (!res.ok) throw new Error ('Failed to fetch itinerary');
-
-        const json = await res.json();
-        const data = json.record;
-
-        setActivities(data.activities || []);
-
+        const res = await fetch('https://my-json-api-lnar.onrender.com/itinerary');
+        if (!res.ok) throw new Error('Failed to fetch itinerary');
+        const data = await res.json();
+        setActivities(data);
       } catch (err) {
-        console.warn('Using local data due to error:', err.message);
-        setActivities(localActivities);
-        setError(null);
+        setError(err.message);
       }  finally {
         setLoading(false);
       }    
     }
     fetchItinerary();
-  },  [tripId])
+  },  [tripId]);
 
-  function handleAddActivity(newActivity) {
-    setActivities((prev) => [...prev, newActivity]);
+   async function handleAddActivity(newActivity) {
+    try {
+      const res = await fetch('https://my-json-api-lnar.onrender.com/itinerary', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newActivity),
+      });
+
+      if (!res.ok) throw new Error('Failed to add activity');
+      const savedActivity = await res.json();
+      setActivities((prev) => [...prev, savedActivity]);
+    } catch (err) {
+      setError(err.message);
+    }
   }
 
-  function handleUpdateActivity(updatedActivity) {
-    setActivities((prev) =>
-      prev.map((act) => (act.id === updatedActivity.id ? updatedActivity : act))
-    );
+  async function handleUpdateActivity(updatedActivity) {
+    try {
+      const res = await fetch(`https://my-json-api-lnar.onrender.com/itinerary/${updatedActivity.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedActivity),
+      });
+
+      if (!res.ok) throw new Error('Failed to update activity');
+      const updatedData = await res.json();
+
+      setActivities((prev) =>
+        prev.map((act) => (act.id === updatedData.id ? updatedData : act))
+      );
+    } catch (err) {
+      setError(err.message);
+    }
   }
 
-  function handleDeleteActivity(deletedActivityId) {
-    setActivities((prev) => prev.filter((act) => act.id !== deletedActivityId));
-  }
-  
-  if (loading) return <p>Loading itinerary...</p>;
-  if (error) return <p>Error: {error}</p>;
+  async function handleDeleteActivity(deletedActivityId) {
+    try {
+      const res = await fetch(`https://my-json-api-lnar.onrender.com/itinerary/${deletedActivityId}`, {
+        method: 'DELETE',
+      });
 
-  return (
+      if (!res.ok) throw new Error('Failed to delete activity');
+
+      setActivities((prev) => prev.filter((act) => act.id !== deletedActivityId));
+    } catch (err) {
+      setError(err.message);
+    }
+  }
+
+return (
     <div className="itinerary-container">
-      <h2>Itinerary</h2>
-      {activities.length === 0 && <p>No activities planned yet.</p>}
-      <ul>
-        {activities.map((activity) => (
-          <ItineraryItem
-            key={activity.id}
-            activity={activity}
-            onUpdate={handleUpdateActivity}
-            onDelete={handleDeleteActivity}
-          />
-        ))}
-      </ul>
-      <AddItineraryItemForm tripId={tripId} onAdd={handleAddActivity} />
+      <h2 className="itinerary-title">Trip Itinerary</h2>
+
+      {loading && <p className="loading-text">Loading itinerary...</p>}
+      {error && <p className="error-text">Error: {error}</p>}
+
+      {!loading && !error && (
+        <>
+          {activities.length === 0 ? (
+            <p className="empty-message">No activities planned yet.</p>
+          ) : (
+            <ul className="itinerary-list">
+              {activities.map((activity) => (
+                <ItineraryItem
+                  key={activity.id}
+                  activity={activity}
+                  onUpdate={handleUpdateActivity}
+                  onDelete={handleDeleteActivity}
+                />
+              ))}
+            </ul>
+          )}
+
+          <AddItineraryItemForm tripId={tripId} onAdd={handleAddActivity} />
+        </>
+      )}
     </div>
   );
 }
