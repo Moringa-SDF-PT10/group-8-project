@@ -90,7 +90,7 @@ return (
           <p className="loading-text">Loading itinerary...</p>
         </div>
       )}
-      
+
       {error && <p className="error-text">Error: {error}</p>}
 
       {!loading && !error && (
