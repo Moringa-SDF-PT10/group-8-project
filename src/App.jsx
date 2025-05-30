@@ -1,34 +1,96 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route } from "react-router-dom"
+import { AuthProvider } from "./context/AuthContext"
+import ProtectedRoute from "./components/profile/ProtectedRoute"
+import NavBar from "./components/profile/NavBar"
+import LoginForm from "./components/profile/LoginForm"
+import RegisterForm from "./components/profile/RegisterForm"
+import ResetPasswordForm from "./components/profile/ResetPasswordForm"
+import ProfileInfo from "./components/profile/ProfileInfo"
+import ProfileTrips from "./components/profile/ProfileTrips"
+import "./styles/App.css"
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <AuthProvider>
+      <div className="app">
+        <NavBar />
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<div className="page-content">Welcome to the Travel App!</div>} />
+            <Route path="/about" element={<div className="page-content">About Us</div>} />
+            <Route path="/contact" element={<div className="page-content">Contact Us</div>} />
+            <Route
+              path="/login"
+              element={
+                <div className="login-container">
+                  <LoginForm />
+                </div>
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <div className="login-container">
+                  <RegisterForm />
+                </div>
+              }
+            />
+            <Route
+              path="/reset-password"
+              element={
+                <div className="login-container">
+                  <ResetPasswordForm />
+                </div>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <div className="page-content">
+                    <ProfileInfo />
+                  </div>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/trips"
+              element={
+                <ProtectedRoute>
+                  <div className="page-content">
+                    <ProfileTrips />
+                  </div>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/itinerary"
+              element={
+                <ProtectedRoute>
+                  <div className="page-content">Itinerary Page</div>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/bookings"
+              element={
+                <ProtectedRoute>
+                  <div className="page-content">Bookings Page</div>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                <ProtectedRoute>
+                  <div className="page-content">Settings Page</div>
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </main>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </AuthProvider>
   )
 }
 
