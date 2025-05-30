@@ -6,6 +6,7 @@ function Itinerary ({ tripId }) {
   const [activities, setActivities] = useState ([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     async function fetchItinerary() {
@@ -83,11 +84,31 @@ return (
     <div className="itinerary-container">
       <h2 className="itinerary-title">Trip Itinerary</h2>
 
-      {loading && <p className="loading-text">Loading itinerary...</p>}
+      {loading && (
+        <div className="loading-spinner-container">
+          <div className="spinner"></div>
+          <p className="loading-text">Loading itinerary...</p>
+        </div>
+      )}
+      
       {error && <p className="error-text">Error: {error}</p>}
 
       {!loading && !error && (
         <>
+          <button onClick={() => setShowForm(!showForm)} className="toggle-button">
+            {showForm ? 'Hide New Activity Form' : '+ Add New Activity'}
+          </button>
+
+          {showForm && (
+            <AddItineraryItemForm 
+              tripId={tripId} 
+              onAdd={(newActivity) => {
+                handleAddActivity(newActivity);
+                setShowForm(false);
+           }} 
+          />
+         )}
+
           {activities.length === 0 ? (
             <p className="empty-message">No activities planned yet.</p>
           ) : (
@@ -102,8 +123,6 @@ return (
               ))}
             </ul>
           )}
-
-          <AddItineraryItemForm tripId={tripId} onAdd={handleAddActivity} />
         </>
       )}
     </div>
