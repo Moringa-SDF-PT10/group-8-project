@@ -6,7 +6,6 @@ import LoginForm from "./components/profile/LoginForm"
 import RegisterForm from "./components/profile/RegisterForm"
 import ResetPasswordForm from "./components/profile/ResetPasswordForm"
 import ProfileInfo from "./components/profile/ProfileInfo"
-import ProfileTrips from "./components/profile/ProfileTrips"
 import "./styles/App.css"
 
 function App() {
@@ -49,16 +48,6 @@ function App() {
                 <ProtectedRoute>
                   <div className="page-content">
                     <ProfileInfo />
-                  </div>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/trips"
-              element={
-                <ProtectedRoute>
-                  <div className="page-content">
-                    <ProfileTrips />
                   </div>
                 </ProtectedRoute>
               }
