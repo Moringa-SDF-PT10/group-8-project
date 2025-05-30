@@ -74,7 +74,6 @@ function App() {
           <Route path="/itinerary-view" element={
             <ProtectedRoute>
               <div className="page-content">
-                {/* Assuming tripId will be dynamic later, for now hardcoding or managing elsewhere */}
                 <Itinerary tripId={1} />
               </div>
             </ProtectedRoute>
