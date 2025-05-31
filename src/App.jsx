@@ -1,14 +1,56 @@
-import { Routes, Route } from "react-router-dom"
-import { AuthProvider } from "./context/AuthContext"
-import ProtectedRoute from "./components/profile/ProtectedRoute"
-import NavBar from "./components/profile/NavBar"
-import LoginForm from "./components/profile/LoginForm"
-import RegisterForm from "./components/profile/RegisterForm"
-import ResetPasswordForm from "./components/profile/ResetPasswordForm"
-import ProfileInfo from "./components/profile/ProfileInfo"
-import "./styles/App.css"
+//kiarie: Import useState for managing suggestions state
+import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/profile/ProtectedRoute";
+import NavBar from "./components/profile/NavBar";
+import LoginForm from "./components/profile/LoginForm";
+import RegisterForm from "./components/profile/RegisterForm";
+import ResetPasswordForm from "./components/profile/ResetPasswordForm";
+import ProfileInfo from "./components/profile/ProfileInfo";
+import "./styles/App.css";
+
+//kiarie: Import voting components
+import AddActivityForm from './components/voting/AddActivityForm';
+import ActivitySuggestions from './components/voting/ActivitySuggestions';
+//kiarie: Import the CSS for voting components (if you created voting.css)
+// import './components/voting/voting.css'; // Make sure path is correct
+
+//kiarie: Mock initial data for suggestions
+const INITIAL_MOCK_SUGGESTIONS = [
+    { id: 's1', name: 'Visit the Eiffel Tower', description: 'Iconic landmark in Paris.', suggestedBy: 'UserA', votes: 5 },
+    { id: 's2', name: 'British Museum Tour', description: 'Explore history and culture.', suggestedBy: 'UserB', votes: 3 },
+];
 
 function App() {
+  //kiarie: State for managing the list of suggestions
+  const [mockSuggestions, setMockSuggestions] = useState(INITIAL_MOCK_SUGGESTIONS);
+
+  //kiarie: Handler to add a new suggestion (will be passed to AddActivityForm)
+  const handleAddSuggestion = (newSuggestionData) => {
+      const newSuggestion = {
+          ...newSuggestionData,
+          id: `s${Date.now()}`, // Simple unique ID for mock
+          suggestedBy: 'CurrentUser (Mock)', // Placeholder until auth is integrated
+          votes: 0
+      };
+      setMockSuggestions(prevSuggestions => [newSuggestion, ...prevSuggestions]);
+      console.log("App: Added new suggestion", newSuggestion);
+  };
+
+  //kiarie: Handler for voting (will be passed down to ActivitySuggestions -> Card -> VoteButton)
+  // This part is for the NEXT iteration (Wiring up the Vote Button)
+  // but we define the function here now.
+  const handleVote = (suggestionId) => {
+      setMockSuggestions(prevSuggestions =>
+          prevSuggestions.map(s =>
+              s.id === suggestionId ? { ...s, votes: (s.votes || 0) + 1 } : s
+          )
+      );
+      console.log(`App: Voted for suggestion ID: ${suggestionId}`);
+  };
+
+
   return (
     <AuthProvider>
       <div className="app">
@@ -76,77 +118,30 @@ function App() {
                 </ProtectedRoute>
               }
             />
+
+            {/* kiarie: New route for the voting system demo */}
+            <Route
+              path="/trip-activities-demo"
+              element={
+                // For now, let's not put it under ProtectedRoute for easy testing,
+                // but eventually, activity planning would likely be protected.
+                <div className="page-content"> {/* Using page-content for consistent styling */}
+                  <h2>Activity Voting Demo</h2>
+                  <AddActivityForm onAddSuggestion={handleAddSuggestion} />
+                  {/* kiarie: Pass suggestions and the handleVote function to ActivitySuggestions */}
+                  {/* kiarie: Note: for this iteration, handleVote is defined but not yet fully wired down to the button */}
+                  <ActivitySuggestions
+                    suggestions={mockSuggestions}
+                    onVote={handleVote} // Pass handleVote here for the next iteration
+                  />
+                </div>
+              }
+            />
           </Routes>
         </main>
       </div>
     </AuthProvider>
   )
-}
-
-//export default App
-
-
-
-//votting jsx
-import React, { useState } from 'react'; // Add useState
-// import './App.css';
-import DestinationSuggestions from './components/api_integration/DestinationSuggestions'; // Keep this if you want
-
-// Import voting components
-import AddActivityForm from './components/voting/AddActivityForm';
-import ActivitySuggestions from './components/voting/ActivitySuggestions';
-
-// Mock initial data for suggestions (will eventually come from backend/context)
-const INITIAL_MOCK_SUGGESTIONS = [
-    { id: 's1', name: 'Visit the Eiffel Tower', description: 'Iconic landmark in Paris.', suggestedBy: 'UserA', votes: 5 },
-    { id: 's2', name: 'British Museum Tour', description: 'Explore history and culture.', suggestedBy: 'UserB', votes: 3 },
-];
-
-
-function App() {
-    const [mockSuggestions, setMockSuggestions] = useState(INITIAL_MOCK_SUGGESTIONS);
-
-    // Handler to add a new suggestion (will be passed to AddActivityForm)
-    const handleAddSuggestion = (newSuggestionData) => {
-        // In a real app, this would be an API call.
-        // For mock, we generate an ID and add to local state.
-        const newSuggestion = {
-            ...newSuggestionData,
-            id: `s${Date.now()}`, // Simple unique ID for mock
-            suggestedBy: 'CurrentUser (Mock)', // Placeholder
-            votes: 0
-        };
-        setMockSuggestions(prevSuggestions => [newSuggestion, ...prevSuggestions]);
-        console.log("App: Added new suggestion", newSuggestion);
-    };
-
-    // Handler for voting (will be passed down to ActivitySuggestions -> Card -> VoteButton)
-    const handleVote = (suggestionId) => {
-        // In a real app, this would be an API call.
-        // For mock, we update local state.
-        setMockSuggestions(prevSuggestions =>
-            prevSuggestions.map(s =>
-                s.id === suggestionId ? { ...s, votes: (s.votes || 0) + 1 } : s
-            )
-        );
-        console.log(`App: Voted for suggestion ID: ${suggestionId}`);
-    };
-
-
-    return (
-        <div className="App">
-            <header className="App-header">
-                <h1>Trip Planner App (SPA)</h1>
-            </header>
-            <main>
-                <DestinationSuggestions />
-                <hr /> {/* Separator */}
-                <h2>Voting System Demo</h2>
-                <AddActivityForm onAddSuggestion={handleAddSuggestion} />
-                <ActivitySuggestions suggestions={mockSuggestions} /* onVote={handleVote} will be passed later */ />
-            </main>
-        </div>
-    );
 }
 
 export default App;
