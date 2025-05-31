@@ -110,7 +110,7 @@ function App() {
 
                 {/* Section for Activity Voting */}
                 <section className="activity-voting-section">
-                  <h2>Activity Voting Demo</h2>
+                  <h2>Some Fun Activities</h2>
                   {user && <p style={{ textAlign: 'center', color: 'lightgreen', fontWeight: 'bold' }}>User: {user.name}</p>}
                   {!user && <p style={{ textAlign: 'center', color: 'orange' }}>Please log in to participate in voting.</p>}
                   <AddActivityForm onAddSuggestion={handleAddSuggestion} />

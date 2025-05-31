@@ -31,7 +31,7 @@ const NavBar = () => {
               <Link to="/bookings" className="nav-link">Bookings</Link>
               <Link to="/settings" className="nav-link">Settings</Link>
               {/* kiarie: Added new link for Trip Activities Demo */}
-              <Link to="/trip-activities-demo" className="nav-link">Activities Demo</Link>
+              <Link to="/trip-activities-demo" className="nav-link">Destination & Activities</Link>
             </>
           )}
         </div>

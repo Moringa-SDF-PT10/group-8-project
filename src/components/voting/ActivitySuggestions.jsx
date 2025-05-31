@@ -8,7 +8,7 @@ const ActivitySuggestions = ({ suggestions, onVote, userVotes, currentUserIdenti
 
     return (
         <div className="activity-suggestions-list">
-            <h3>Suggested Activities</h3>
+            <h3>Vote for Suggested Activities</h3>
             {suggestions.map(suggestion => {
                 const votesForThisSuggestion = userVotes ? userVotes[suggestion.id] || [] : [];
                 const hasCurrentUserVoted = currentUserIdentifier ? votesForThisSuggestion.includes(currentUserIdentifier) : false;

@@ -1,122 +1,69 @@
+// src/components/api_integration/DestinationSuggestions.jsx
 import React, { useState, useEffect } from 'react';
-import './DestinationSuggestions.css';
-
-// --- MOCK DATA (Structure remains, imageUrl will be dynamic) ---
-const MOCK_CITY_SUGGESTIONS = [
-    { name: "Paris, France", href: "mock_paris_href", searchKeyword: "Paris city" },
-    { name: "London, United Kingdom", href: "mock_london_href", searchKeyword: "London city" },
-    { name: "Tokyo, Japan", href: "mock_tokyo_href", searchKeyword: "Tokyo city" },
-    { name: "New York, New York, United States", href: "mock_newyork_href", searchKeyword: "New York City" },
-    { name: "Rome, Italy", href: "mock_rome_href", searchKeyword: "Rome city" }
-];
-
-// Base details, imageUrl will be added dynamically
-const MOCK_CITY_DETAILS_BASE = {
-    "mock_paris_href": {
-        name: "Paris (Mock)",
-        full_name: "Paris, Ile-de-France, France",
-        population: 2148271,
-        summary: "<p>Mock Data: Paris, France, is among the top cities with a <b>free business environment</b>...</p>",
-        searchKeyword: "Paris city skyline" // More specific keyword for better image
-    },
-    "mock_london_href": {
-        name: "London (Mock)",
-        full_name: "London, England, United Kingdom",
-        population: 8982000,
-        summary: "<p>Mock Data: London, United Kingdom, is among the top cities with a <b>free business environment</b>...</p>",
-        searchKeyword: "London city landmarks"
-    },
-    "mock_tokyo_href": {
-        name: "Tokyo (Mock)",
-        full_name: "Tokyo, Japan",
-        population: 13929286,
-        summary: "<p>Mock Data: Tokyo, Japan, is known for its blend of ultramodern and traditional architecture...</p>",
-        searchKeyword: "Tokyo city night"
-    },
-    "mock_newyork_href": {
-        name: "New York (Mock)",
-        full_name: "New York, New York, United States",
-        population: 8399000,
-        summary: "<p>Mock Data: New York City comprises 5 boroughs sitting where the Hudson River meets the Atlantic Ocean...</p>",
-        searchKeyword: "New York City skyline"
-    },
-    "mock_rome_href": {
-        name: "Rome (Mock)",
-        full_name: "Rome, Lazio, Italy",
-        population: 2872800,
-        summary: "<p>Mock Data: Rome, Italy’s capital, is a sprawling, cosmopolitan city with nearly 3,000 years of globally influential art...</p>",
-        searchKeyword: "Rome ancient ruins"
-    }
-};
-// --- END OF MOCK DATA ---
+import './DestinationSuggestions.css'; // Your CSS file
 
 const DestinationSuggestions = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [suggestions, setSuggestions] = useState([]);
-    const [selectedCityHref, setSelectedCityHref] = useState(null);
-    const [cityDetails, setCityDetails] = useState(null);
+    const [selectedCountry, setSelectedCountry] = useState(null); // Will store the full country object
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const handleSearchChange = (event) => {
-        setSearchTerm(event.target.value);
-        setSelectedCityHref(null);
-        setCityDetails(null);
-    };
-
-    const fetchCitySuggestions = async (query) => {
+    const fetchCountrySuggestions = async (query) => {
         if (!query || query.length < 2) {
             setSuggestions([]);
+            setSelectedCountry(null);
             return;
         }
         setIsLoading(true);
         setError(null);
-        console.log(`MOCK API: Simulating search for city suggestions with query: "${query}"`);
-        await new Promise(resolve => setTimeout(resolve, 300));
+        setSelectedCountry(null); // Clear previous selection
 
         try {
-            const filteredSuggestions = MOCK_CITY_SUGGESTIONS.filter(s =>
-                s.name.toLowerCase().includes(query.toLowerCase())
-            );
-            setSuggestions(filteredSuggestions);
+            const response = await fetch(`https://restcountries.com/v3.1/name/${encodeURIComponent(query)}`);
+            if (!response.ok) {
+                if (response.status === 404) {
+                    setSuggestions([]); // Country not found
+                    throw new Error(`Country not found for "${query}"`);
+                }
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            setSuggestions(data.map(country => ({
+                name: country.name.common,
+                officialName: country.name.official,
+                cca3: country.cca3 // Unique country code, good for key
+            })));
         } catch (err) {
-            console.error("Error processing mock city suggestions:", err);
-            setError("Error processing mock data.");
+            console.error("Error fetching country suggestions:", err);
+            setError(err.message);
             setSuggestions([]);
         } finally {
             setIsLoading(false);
         }
     };
 
-    const fetchCityDetails = async (cityHref) => {
-        if (!cityHref) return;
+    const fetchCountryDetails = async (countryName) => { // We search again to get the full object
+        if (!countryName) return;
         setIsLoading(true);
         setError(null);
-        setCityDetails(null);
-        console.log(`MOCK API: Simulating fetch for city details with href: "${cityHref}"`);
-        await new Promise(resolve => setTimeout(resolve, 400));
-
         try {
-            const baseDetails = MOCK_CITY_DETAILS_BASE[cityHref];
-            if (baseDetails) {
-                // --- DYNAMIC IMAGE URL GENERATION ---
-                const imageKeyword = baseDetails.searchKeyword || baseDetails.name.replace(' (Mock)', ''); // Use specific keyword or fallback to city name
-                const imageUrl = `https://source.unsplash.com/600x400/?${encodeURIComponent(imageKeyword)}`;
-                // --- END OF DYNAMIC IMAGE URL GENERATION ---
-
-                setCityDetails({
-                    ...baseDetails,
-                    imageUrl: imageUrl // Add the dynamically generated Unsplash URL
-                });
+            // Fetching again by common name to get the full object for details
+            // This ensures we have the complete, fresh data for the selected country
+            const response = await fetch(`https://restcountries.com/v3.1/name/${encodeURIComponent(countryName)}?fullText=true`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            if (data && data.length > 0) {
+                setSelectedCountry(data[0]); // Select the first match (should be specific with fullText=true)
             } else {
-                console.warn(`Mock details not found for href: ${cityHref}`);
-                setError(`Mock details not found for: ${cityHref.replace('mock_', '').replace('_href', '')}`);
-                setCityDetails(null);
+                throw new Error(`Details not found for ${countryName}`);
             }
         } catch (err) {
-            console.error("Error fetching mock city details:", err);
+            console.error("Error fetching country details:", err);
             setError(err.message);
-            setCityDetails(null);
+            setSelectedCountry(null);
         } finally {
             setIsLoading(false);
         }
@@ -125,70 +72,70 @@ const DestinationSuggestions = () => {
     useEffect(() => {
         const handler = setTimeout(() => {
             if (searchTerm.trim() && searchTerm.length >= 2) {
-                fetchCitySuggestions(searchTerm);
+                fetchCountrySuggestions(searchTerm);
             } else {
                 setSuggestions([]);
+                setSelectedCountry(null);
             }
         }, 500);
         return () => clearTimeout(handler);
     }, [searchTerm]);
 
-    useEffect(() => {
-        if (selectedCityHref) {
-            fetchCityDetails(selectedCityHref);
-        }
-    }, [selectedCityHref]);
-
     const handleSuggestionClick = (suggestion) => {
-        setSearchTerm(suggestion.name.replace(' (Mock)', ''));
-        setSuggestions([]);
-        setSelectedCityHref(suggestion.href);
+        setSearchTerm(suggestion.name); // Fill search bar
+        setSuggestions([]); // Clear suggestions list
+        fetchCountryDetails(suggestion.name); // Fetch details for the clicked common name
     };
 
     return (
         <div className="destination-suggestions-container">
-            <h2>Find Destination Ideas</h2>
+            <h2>Choose a country to visit</h2>
             <input
                 type="text"
-                placeholder="Search for a city (min 2 chars)..."
+                placeholder="Search for a country..."
                 value={searchTerm}
-                onChange={handleSearchChange}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 className="search-input"
             />
 
-            {isLoading && <p>Loading...</p>}
-            {error && <p className="error-message">Error: {error}</p>}
+            {isLoading && <p className="loading-message">Loading...</p>}
+            {error && !selectedCountry && <p className="error-message">Error: {error}</p>} {/* Show error only if no country is selected */}
 
-            {suggestions.length > 0 && !selectedCityHref && (
+
+            {suggestions.length > 0 && !selectedCountry && (
                 <ul className="suggestions-list">
-                    {suggestions.map((suggestion) => (
+                    {suggestions.map((country) => (
                         <li
-                            key={suggestion.href}
-                            onClick={() => handleSuggestionClick(suggestion)}
+                            key={country.cca3}
+                            onClick={() => handleSuggestionClick(country)}
                             className="suggestion-item"
                         >
-                            {suggestion.name}
+                            {country.name} ({country.officialName})
                         </li>
                     ))}
                 </ul>
             )}
 
-            {cityDetails && (
-                <div className="city-details-card">
-                    <h3>{cityDetails.name}</h3>
-                    {cityDetails.population && <p>Population: {cityDetails.population.toLocaleString()}</p>}
-                    {/* The key change for the image: */}
-                    {cityDetails.imageUrl && (
-                        <img
-                            src={cityDetails.imageUrl}
-                            alt={`Image of ${cityDetails.name.replace(' (Mock)', '')}`} // Cleaner alt text
-                            className="city-image"
-                            // Add a key to force re-render if the keyword changes for the same city (though unlikely with current setup)
-                            // key={cityDetails.imageUrl}
-                        />
+            {selectedCountry && (
+                <div className="city-details-card"> {/* Reusing class name, but it's country details now */}
+                    <h3>{selectedCountry.name.common}</h3>
+                    <p><strong>Official Name:</strong> {selectedCountry.name.official}</p>
+                    {selectedCountry.flags && selectedCountry.flags.png && (
+                        <img src={selectedCountry.flags.png} alt={`Flag of ${selectedCountry.name.common}`} className="city-image" />
                     )}
-                    {cityDetails.summary && (
-                        <div className="city-summary" dangerouslySetInnerHTML={{ __html: cityDetails.summary }} />
+                    <p><strong>Capital:</strong> {selectedCountry.capital ? selectedCountry.capital.join(', ') : 'N/A'}</p>
+                    <p><strong>Region:</strong> {selectedCountry.region} ({selectedCountry.subregion})</p>
+                    <p><strong>Population:</strong> {selectedCountry.population.toLocaleString()}</p>
+                    <p><strong>Languages:</strong> {selectedCountry.languages ? Object.values(selectedCountry.languages).join(', ') : 'N/A'}</p>
+                    {selectedCountry.currencies && Object.values(selectedCountry.currencies).length > 0 && (
+                        <p><strong>Currency:</strong> {Object.values(selectedCountry.currencies)[0].name} ({Object.values(selectedCountry.currencies)[0].symbol})</p>
+                    )}
+                    {selectedCountry.maps && (
+                        <p>
+                            <a href={selectedCountry.maps.googleMaps} target="_blank" rel="noopener noreferrer">View on Google Maps</a>
+                            {' | '}
+                            <a href={selectedCountry.maps.openStreetMaps} target="_blank" rel="noopener noreferrer">View on OpenStreetMap</a>
+                        </p>
                     )}
                 </div>
             )}
