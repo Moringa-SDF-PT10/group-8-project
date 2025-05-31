@@ -29,7 +29,7 @@ function ItineraryItem({ activity, onUpdate, onDelete }) {
 
   async function handleSave() {
     if (!formData.name || !formData.time) {
-      alert('Please fill in both name and time fields.');
+      setError('Please fill in both name and time fields.');
       return;
     }
 
@@ -168,7 +168,6 @@ function ItineraryItem({ activity, onUpdate, onDelete }) {
       <p className="item-description">{activity.description}</p>
 
       <div className="button-group">
-        <button disabled>Save</button>
         <button className="btn edit-btn" onClick={() => setIsEditing(true)}>
           Edit
         </button>

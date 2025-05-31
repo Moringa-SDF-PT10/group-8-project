@@ -8,14 +8,17 @@ function Itinerary ({ tripId }) {
   const [error, setError] = useState(null);
   const [showForm, setShowForm] = useState(false);
 
+  const API_URL = 'https://my-json-api-lnar.onrender.com/itinerary';
+
   useEffect(() => {
     async function fetchItinerary() {
       try {
         setLoading(true);
         setError(null);
 
-        const res = await fetch('https://my-json-api-lnar.onrender.com/itinerary');
+        const res = await fetch(API_URL);
         if (!res.ok) throw new Error('Failed to fetch itinerary');
+
         const data = await res.json();
         setActivities(data);
       } catch (err) {
@@ -24,12 +27,13 @@ function Itinerary ({ tripId }) {
         setLoading(false);
       }    
     }
+
     fetchItinerary();
   },  [tripId]);
 
-   async function handleAddActivity(newActivity) {
+   const handleAddActivity = async (newActivity) => {
     try {
-      const res = await fetch('https://my-json-api-lnar.onrender.com/itinerary', {
+      const res = await fetch(API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -38,16 +42,18 @@ function Itinerary ({ tripId }) {
       });
 
       if (!res.ok) throw new Error('Failed to add activity');
+
       const savedActivity = await res.json();
       setActivities((prev) => [...prev, savedActivity]);
+      
     } catch (err) {
       setError(err.message);
     }
   }
 
-  async function handleUpdateActivity(updatedActivity) {
+  const handleUpdateActivity = async (updatedActivity) => {
     try {
-      const res = await fetch(`https://my-json-api-lnar.onrender.com/itinerary/${updatedActivity.id}`, {
+      const res = await fetch(`${API_URL}/${updatedActivity.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -56,8 +62,8 @@ function Itinerary ({ tripId }) {
       });
 
       if (!res.ok) throw new Error('Failed to update activity');
-      const updatedData = await res.json();
 
+      const updatedData = await res.json();
       setActivities((prev) =>
         prev.map((act) => (act.id === updatedData.id ? updatedData : act))
       );
@@ -66,15 +72,15 @@ function Itinerary ({ tripId }) {
     }
   }
 
-  async function handleDeleteActivity(deletedActivityId) {
+  const handleDeleteActivity = async (id) => {
     try {
-      const res = await fetch(`https://my-json-api-lnar.onrender.com/itinerary/${deletedActivityId}`, {
+      const res = await fetch(`${API_URL}/${id}`, {
         method: 'DELETE',
       });
 
       if (!res.ok) throw new Error('Failed to delete activity');
 
-      setActivities((prev) => prev.filter((act) => act.id !== deletedActivityId));
+      setActivities((prev) => prev.filter((act) => act.id !== id));
     } catch (err) {
       setError(err.message);
     }

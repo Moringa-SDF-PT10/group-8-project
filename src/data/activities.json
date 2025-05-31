@@ -159,6 +159,86 @@
       "description": "Beautiful sunset on a dhow boat.",
       "day": 9,
       "location": "Watamu"
-    }
+    },
+    {
+    "id": 21,
+    "name": "Visit Nairobi National Museum and Snake Park",
+    "time": "10:00",
+    "description": "Learn about Kenya’s history and see native reptiles.",
+    "day": 1,
+    "location": "Nairobi"
+  },
+  {
+    "id": 22,
+    "name": "Cave exploration and picnic at Hell’s Gate National Park",
+    "time": "12:00",
+    "description": "Adventure through scenic gorges and geothermal features.",
+    "day": 2,
+    "location": "Naivasha"
+  },
+  {
+    "id": 23,
+    "name": "Horseback safari at Crescent Island",
+    "time": "15:00",
+    "description": "A guided wildlife ride along the lake shore.",
+    "day": 2,
+    "location": "Naivasha"
+  },
+  {
+    "id": 24,
+    "name": "Cultural night with traditional dances at Maasai Mara camp",
+    "time": "20:00",
+    "description": "Enjoy Maasai songs, stories, and bonfire dinner.",
+    "day": 3,
+    "location": "Maasai Mara"
+  },
+  {
+    "id": 25,
+    "name": "Visit Nairobi Railway Art District",
+    "time": "16:00",
+    "description": "Explore murals, local art, and handmade crafts.",
+    "day": 5,
+    "location": "Nairobi"
+  },
+  {
+    "id": 26,
+    "name": "Deep sea fishing in Mombasa",
+    "time": "07:30",
+    "description": "Catch marlins and enjoy the open sea.",
+    "day": 6,
+    "location": "Mombasa"
+  },
+  {
+    "id": 27,
+    "name": "Scuba diving at Kisite Marine Park",
+    "time": "08:00",
+    "description": "Underwater adventure exploring coral reefs.",
+    "day": 8,
+    "location": "Diani"
+  },
+  {
+    "id": 28,
+    "name": "Yoga and wellness session by the beach",
+    "time": "06:30",
+    "description": "Relaxing start to your day in nature.",
+    "day": 7,
+    "location": "Mombasa"
+  },
+  {
+    "id": 29,
+    "name": "Quad biking through sand dunes",
+    "time": "17:30",
+    "description": "Evening ride on coastal dunes.",
+    "day": 9,
+    "location": "Malindi"
+  },
+  {
+    "id": 30,
+    "name": "Wrap-up dinner and storytelling with local guide",
+    "time": "19:00",
+    "description": "Share highlights and reflect on the journey.",
+    "day": 10,
+    "location": "Nairobi"
+  }
   ]
 }
