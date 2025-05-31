@@ -1,41 +1,53 @@
 import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+// kiarie: Import Link from react-router-dom
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
+// kiarie: Assuming you might have a NavBar.css or similar for styling
+// import './NavBar.css';
 
 
 const NavBar = () => {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  const handleLogout = () => {
+    logout();
+    navigate('/login'); // Navigate after logout
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
         <div className="nav-links">
-          <a href="/" className="nav-link">Home</a>
-          <a href="/about" className="nav-link">About</a>
-          <a href="/contact" className="nav-link">Contact</a>
+          {/* kiarie: Changed <a> to <Link to="..."> */}
+          <Link to="/" className="nav-link">Home</Link>
+          <Link to="/about" className="nav-link">About</Link>
+          <Link to="/contact" className="nav-link">Contact</Link>
           {user && (
             <>
-              <a href="/profile" className="nav-link">Profile</a>
-              <a href="/trips" className="nav-link">Trips</a>
-              <a href="/itinerary" className="nav-link">Itinerary</a>
-              <a href="/bookings" className="nav-link">Bookings</a>
-              <a href="/settings" className="nav-link">Settings</a>
+              <Link to="/profile" className="nav-link">Profile</Link>
+              <Link to="/trips" className="nav-link">Trips</Link>
+              <Link to="/itinerary" className="nav-link">Itinerary</Link>
+              <Link to="/bookings" className="nav-link">Bookings</Link>
+              <Link to="/settings" className="nav-link">Settings</Link>
+              {/* kiarie: Added new link for Trip Activities Demo */}
+              <Link to="/trip-activities-demo" className="nav-link">Activities Demo</Link>
             </>
           )}
         </div>
         <div className="nav-actions">
           {user ? (
             <button
-              onClick={() => { logout(); navigate('/login'); }}
-              className="button button-primary"
+              onClick={handleLogout} // kiarie: Use the defined handleLogout function
+              className="button button-primary" // Assuming you have these CSS classes
             >
               Logout
             </button>
           ) : (
             <>
-              <a href="/login" className="nav-link">Login</a>
-              <a href="/register" className="nav-link">Register</a>
+              {/* kiarie: Changed <a> to <Link to="..."> */}
+              <Link to="/login" className="nav-link">Login</Link>
+              <Link to="/register" className="nav-link">Register</Link>
             </>
           )}
         </div>

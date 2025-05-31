@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-// import './voting.css'; // We'll uncomment later
+// import './voting.css';
 
-const AddActivityForm = ({ onAddSuggestion }) => { // onAddSuggestion will be a prop to lift state up
+const AddActivityForm = ({ onAddSuggestion }) => {
     const [activityName, setActivityName] = useState('');
     const [description, setDescription] = useState('');
 
@@ -11,8 +11,14 @@ const AddActivityForm = ({ onAddSuggestion }) => { // onAddSuggestion will be a 
             alert("Activity name is required!");
             return;
         }
-        // Later, we'll call onAddSuggestion here
-        console.log("Submitting new activity:", { name: activityName, description });
+
+        console.log("AddActivityForm: Submitting new activity:", { name: activityName, description });
+        if (typeof onAddSuggestion === 'function') {
+            onAddSuggestion({ name: activityName, description: description.trim() });
+        } else {
+            console.error("AddActivityForm: onAddSuggestion prop is not a function!");
+        }
+
         setActivityName('');
         setDescription('');
     };

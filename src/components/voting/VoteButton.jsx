@@ -1,16 +1,20 @@
 import React from 'react';
-// import './voting.css';
 
-const VoteButton = ({ suggestionId, onVote }) => {
-    const handleVote = () => {
-        // Later, we'll call onVote here
-        console.log(`Voting for suggestion ID: ${suggestionId}`);
-        // onVote(suggestionId);
+// Accept hasVoted prop to alter appearance/behavior
+const VoteButton = ({ suggestionId, onVote, hasVoted }) => {
+    const handleVoteClick = () => {
+        if (typeof onVote === 'function') {
+            onVote(suggestionId);
+        }
     };
 
     return (
-        <button onClick={handleVote} className="vote-button">
-            Vote
+        <button
+            onClick={handleVoteClick}
+            className={`vote-button ${hasVoted ? 'voted' : ''}`}
+            // Button is no longer disabled, so user can click to un-vote
+        >
+            {hasVoted ? 'Unvote' : 'Vote'} {/* Changed text when voted */}
         </button>
     );
 };

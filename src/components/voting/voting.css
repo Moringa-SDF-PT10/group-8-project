@@ -1,0 +1,161 @@
+/* Styles for the main container of the voting feature section if you wrap it */
+.voting-feature-section {
+  margin-top: 20px;
+  padding: 15px;
+  color: #f0f0f0; /* Default light text color for the section if background is dark */
+}
+
+/* Styling for the form to add new activity suggestions */
+.add-activity-form {
+  /* Assuming form itself has a lighter background than the page */
+  background-color: #3a3a3a; /* Darker gray, but lighter than black */
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Adjusted shadow for dark theme */
+  color: #e0e0e0; /* Light text for form elements */
+}
+
+.add-activity-form h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #ffffff; /* White or very light gray for headings */
+}
+
+.add-activity-form div {
+  margin-bottom: 15px;
+}
+
+.add-activity-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #d0d0d0; /* Lighter gray for labels */
+}
+
+.add-activity-form input[type="text"],
+.add-activity-form textarea {
+  width: calc(100% - 20px);
+  padding: 10px;
+  border: 1px solid #555; /* Darker border for inputs on dark bg */
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  background-color: #505050; /* Dark input background */
+  color: #f0f0f0; /* Light text in input fields */
+}
+
+.add-activity-form input[type="text"]::placeholder,
+.add-activity-form textarea::placeholder {
+  color: #999; /* Lighter placeholder text */
+}
+
+
+.add-activity-form textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.add-activity-form button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.add-activity-form button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Styling for the list that holds all activity suggestions */
+.activity-suggestions-list h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #ffffff; /* White or very light gray for this heading */
+}
+
+/* Styling for an individual activity suggestion card */
+.activity-suggestion-card {
+  background-color: #424242; /* Dark card background */
+  border: 1px solid #585858; /* Slightly lighter border for card */
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  color: #e0e0e0; /* Default light text for card content */
+}
+
+.activity-suggestion-card h4 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: #f5f5f5; /* Very light color for card titles */
+}
+
+.activity-suggestion-card .description {
+  font-size: 0.95em;
+  color: #c0c0c0; /* Lighter gray for description */
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.activity-suggestion-card .suggested-by {
+  font-size: 0.85em;
+  color: #a0a0a0; /* Medium light gray for 'suggested by' */
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+/* Container for vote count and vote button */
+.activity-suggestion-card .vote-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #555; /* Darker separator */
+}
+
+.activity-suggestion-card .vote-section span {
+  font-weight: 500;
+  color: #f0f0f0; /* Light text for "Votes:" count */
+}
+
+/* Styling for the vote button */
+.vote-button {
+  background-color: #2da44e; /* Slightly brighter green */
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.vote-button:hover {
+  background-color: #268841;
+}
+
+.vote-button.voted,
+.vote-button:disabled {
+  background-color: #555e69; /* Darker grey for disabled on dark theme */
+  border-color: #555e69;
+  opacity: 0.7;
+  cursor: not-allowed;
+  color: #bbb; /* Lighter text for disabled button */
+}
+
+.vote-button.voted:hover,
+.vote-button:disabled:hover {
+  background-color: #484f58;
+}
+
+/* General message styling if no suggestions */
+.activity-suggestions-list p {
+  color: #b0b0b0; /* Lighter italic text */
+  font-style: italic;
+}
