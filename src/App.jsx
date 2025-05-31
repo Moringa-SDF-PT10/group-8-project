@@ -6,6 +6,7 @@ import LoginForm from "./components/profile/LoginForm"
 import RegisterForm from "./components/profile/RegisterForm"
 import ResetPasswordForm from "./components/profile/ResetPasswordForm"
 import ProfileInfo from "./components/profile/ProfileInfo"
+import MyTripsPage from "./components/Trips/MyTripsPage"
 import "./styles/App.css"
 
 function App() {
@@ -51,6 +52,12 @@ function App() {
                   </div>
                 </ProtectedRoute>
               }
+            />
+            <Route path="/trips" element={
+              <ProtectedRoute>
+                <MyTripsPage />
+              </ProtectedRoute>
+              } 
             />
             <Route
               path="/itinerary"
