@@ -83,4 +83,70 @@ function App() {
   )
 }
 
-export default App
+//export default App
+
+
+
+//votting jsx
+import React, { useState } from 'react'; // Add useState
+// import './App.css';
+import DestinationSuggestions from './components/api_integration/DestinationSuggestions'; // Keep this if you want
+
+// Import voting components
+import AddActivityForm from './components/voting/AddActivityForm';
+import ActivitySuggestions from './components/voting/ActivitySuggestions';
+
+// Mock initial data for suggestions (will eventually come from backend/context)
+const INITIAL_MOCK_SUGGESTIONS = [
+    { id: 's1', name: 'Visit the Eiffel Tower', description: 'Iconic landmark in Paris.', suggestedBy: 'UserA', votes: 5 },
+    { id: 's2', name: 'British Museum Tour', description: 'Explore history and culture.', suggestedBy: 'UserB', votes: 3 },
+];
+
+
+function App() {
+    const [mockSuggestions, setMockSuggestions] = useState(INITIAL_MOCK_SUGGESTIONS);
+
+    // Handler to add a new suggestion (will be passed to AddActivityForm)
+    const handleAddSuggestion = (newSuggestionData) => {
+        // In a real app, this would be an API call.
+        // For mock, we generate an ID and add to local state.
+        const newSuggestion = {
+            ...newSuggestionData,
+            id: `s${Date.now()}`, // Simple unique ID for mock
+            suggestedBy: 'CurrentUser (Mock)', // Placeholder
+            votes: 0
+        };
+        setMockSuggestions(prevSuggestions => [newSuggestion, ...prevSuggestions]);
+        console.log("App: Added new suggestion", newSuggestion);
+    };
+
+    // Handler for voting (will be passed down to ActivitySuggestions -> Card -> VoteButton)
+    const handleVote = (suggestionId) => {
+        // In a real app, this would be an API call.
+        // For mock, we update local state.
+        setMockSuggestions(prevSuggestions =>
+            prevSuggestions.map(s =>
+                s.id === suggestionId ? { ...s, votes: (s.votes || 0) + 1 } : s
+            )
+        );
+        console.log(`App: Voted for suggestion ID: ${suggestionId}`);
+    };
+
+
+    return (
+        <div className="App">
+            <header className="App-header">
+                <h1>Trip Planner App (SPA)</h1>
+            </header>
+            <main>
+                <DestinationSuggestions />
+                <hr /> {/* Separator */}
+                <h2>Voting System Demo</h2>
+                <AddActivityForm onAddSuggestion={handleAddSuggestion} />
+                <ActivitySuggestions suggestions={mockSuggestions} /* onVote={handleVote} will be passed later */ />
+            </main>
+        </div>
+    );
+}
+
+export default App;
