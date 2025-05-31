@@ -1,19 +1,16 @@
-// Resolved App.jsx for merging 'main' into 'feature/activity-voting-system'
 
-// Combine imports: Take all from HEAD, and add MyTripsPage from main if not already there implicitly
-import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import { useAuth } from "./context/AuthContext"; // Assumes AuthProvider wraps App in main.jsx
+import { useAuth } from "./context/AuthContext";
 import ProtectedRoute from "./components/profile/ProtectedRoute";
 import NavBar from "./components/profile/NavBar";
 import LoginForm from "./components/profile/LoginForm";
 import RegisterForm from "./components/profile/RegisterForm";
 import ResetPasswordForm from "./components/profile/ResetPasswordForm";
 import ProfileInfo from "./components/profile/ProfileInfo";
-import MyTripsPage from "./components/Trips/MyTripsPage"; // This comes from 'main' branch changes
-import "./styles/App.css"; // Your global app styles
+import MyTripsPage from "./components/Trips/MyTripsPage"; /
+import "./styles/App.css";
 
-// Imports for Voting System components and their CSS (from HEAD)
+
 import AddActivityForm from './components/voting/AddActivityForm';
 import ActivitySuggestions from './components/voting/ActivitySuggestions';
 import './components/voting/voting.css'; // Voting specific styles
@@ -28,9 +25,7 @@ const INITIAL_MOCK_SUGGESTIONS = [ // From HEAD
 ];
 
 function App() {
-  // This part (state and handlers) seems to have been auto-merged correctly
-  // as it was outside the explicit conflict blocks you pasted.
-  // We ensure it uses 'user' from useAuth.
+
   const [mockSuggestions, setMockSuggestions] = useState(INITIAL_MOCK_SUGGESTIONS);
   const { user } = useAuth(); // This relies on AuthProvider in main.jsx
   const [userVotes, setUserVotes] = useState({});
@@ -66,8 +61,8 @@ function App() {
   };
 
   return (
-    // We choose the structure from HEAD here, which does NOT include <AuthProvider>
-    // as AuthProvider is handled in main.jsx
+
+
     <div className="app">
       <NavBar />
       <main className="main-content">
@@ -105,7 +100,7 @@ function App() {
                 </section>
                 <hr style={{margin: "20px 0", borderColor: "#555"}} />
                 <section className="activity-voting-section">
-                  <h2>Activity Voting Demo</h2> {/* Changed heading slightly from your HEAD for clarity */}
+                  <h2>Activity Voting Demo</h2> {
                   {user && <p style={{ textAlign: 'center', color: 'lightgreen', fontWeight: 'bold' }}>User: {user.name}</p>}
                   {!user && <p style={{ textAlign: 'center', color: 'orange' }}>Please log in to participate in voting.</p>}
                   <AddActivityForm onAddSuggestion={handleAddSuggestion} />
