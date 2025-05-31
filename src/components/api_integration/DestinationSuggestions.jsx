@@ -1,6 +1,6 @@
 // src/components/api_integration/DestinationSuggestions.jsx
 import React, { useState, useEffect } from 'react';
-import './DestinationSuggestions.css'; // Your CSS file
+import './DestinationSuggestions.css';
 
 const DestinationSuggestions = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -17,7 +17,7 @@ const DestinationSuggestions = () => {
         }
         setIsLoading(true);
         setError(null);
-        setSelectedCountry(null); // Clear previous selection
+        setSelectedCountry(null);
 
         try {
             const response = await fetch(`https://restcountries.com/v3.1/name/${encodeURIComponent(query)}`);
@@ -48,15 +48,14 @@ const DestinationSuggestions = () => {
         setIsLoading(true);
         setError(null);
         try {
-            // Fetching again by common name to get the full object for details
-            // This ensures we have the complete, fresh data for the selected country
+
             const response = await fetch(`https://restcountries.com/v3.1/name/${encodeURIComponent(countryName)}?fullText=true`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const data = await response.json();
             if (data && data.length > 0) {
-                setSelectedCountry(data[0]); // Select the first match (should be specific with fullText=true)
+                setSelectedCountry(data[0]); 
             } else {
                 throw new Error(`Details not found for ${countryName}`);
             }

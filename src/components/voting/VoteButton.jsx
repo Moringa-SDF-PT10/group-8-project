@@ -1,6 +1,6 @@
 import React from 'react';
 
-// Accept hasVoted prop to alter appearance/behavior
+
 const VoteButton = ({ suggestionId, onVote, hasVoted }) => {
     const handleVoteClick = () => {
         if (typeof onVote === 'function') {
