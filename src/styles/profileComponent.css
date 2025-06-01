@@ -150,8 +150,9 @@
   padding: 1rem;
 }
 
-/* Navigation styles */
-.navbar {
+/* Navigation styles */ 
+/*johnson: commented the navbar styling to use the navbar css file*/
+/* .navbar {
   background-color: var(--background-white);
   box-shadow: var(--shadow-light);
   padding: 1rem 0;
@@ -190,7 +191,7 @@
   display: flex;
   gap: 1rem;
   align-items: center;
-}
+} */
 
 /* Responsive Design */
 
