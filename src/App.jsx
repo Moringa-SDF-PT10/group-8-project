@@ -1,4 +1,5 @@
 
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
 import ProtectedRoute from "./components/profile/ProtectedRoute";
@@ -7,7 +8,8 @@ import LoginForm from "./components/profile/LoginForm";
 import RegisterForm from "./components/profile/RegisterForm";
 import ResetPasswordForm from "./components/profile/ResetPasswordForm";
 import ProfileInfo from "./components/profile/ProfileInfo";
-import MyTripsPage from "./components/Trips/MyTripsPage"; /
+import MyTripsPage from "./components/Trips/MyTripsPage"; 
+import HomePage from "./components/home/Homepage";
 import "./styles/App.css";
 
 
@@ -68,7 +70,7 @@ function App() {
       <main className="main-content">
         <Routes>
           {/* Common routes present in both HEAD and main */}
-          <Route path="/" element={<div className="page-content">Welcome to the Travel App!</div>} />
+          <Route path="/" element={<div className=""><HomePage /></div>} /> {/*johnson: imported homepage*/ }
           <Route path="/about" element={<div className="page-content">About Us</div>} />
           <Route path="/contact" element={<div className="page-content">Contact Us</div>} />
           <Route path="/login" element={<div className="login-container"><LoginForm /></div>} />
@@ -100,7 +102,7 @@ function App() {
                 </section>
                 <hr style={{margin: "20px 0", borderColor: "#555"}} />
                 <section className="activity-voting-section">
-                  <h2>Activity Voting Demo</h2> {
+                  <h2>Activity Voting Demo</h2> 
                   {user && <p style={{ textAlign: 'center', color: 'lightgreen', fontWeight: 'bold' }}>User: {user.name}</p>}
                   {!user && <p style={{ textAlign: 'center', color: 'orange' }}>Please log in to participate in voting.</p>}
                   <AddActivityForm onAddSuggestion={handleAddSuggestion} />
