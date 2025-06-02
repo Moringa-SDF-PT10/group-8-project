@@ -102,7 +102,10 @@ function Itinerary ({ tripId , itinerary = [], onItineraryUpdate}) {
 
       if (!res.ok) throw new Error('Failed to delete activity');
 
-      setActivities((prev) => prev.filter((act) => act.id !== id));
+      const updatedActivities = activities.filter(act => act.id !== id);
+      setActivities(updatedActivities);
+      onItineraryUpdate(updatedActivities);
+
     } catch (err) {
       setError(err.message);
     }

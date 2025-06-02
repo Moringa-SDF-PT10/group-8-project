@@ -1,5 +1,6 @@
 import React from 'react';
 import "../../styles/Homepage.css"
+import { Link, useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
 
@@ -15,13 +16,13 @@ const HomePage = () => {
           <div className="card">
             <h2>My Trips</h2>
             <p>View and manage your trips.</p>
-            <button className='button' style={{ backgroundColor: '#1a4dab', color: 'white' }}>View Trips</button>
+            <Link to="/trips" style={{ backgroundColor: '#1a4dab', color: 'white' }} className='button'>Trips</Link>
           </div>
 
           <div className="card">
             <h2>Vote on Activities</h2>
             <p>Suggest and vote on trip activities</p>
-            <button className='button'>Suggest Activity</button>
+            <Link to="/itinerary" style={{ backgroundColor: '#1a4dab', color: 'white' }} className='button'>Suggest Activity</Link>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Itinerary from '../Itinerary/Itinerary';
 import { Link } from 'react-router-dom';
+import '../../styles/TripsPage.css'; 
 
 const TripsPage = ({ joinedTrips, onJoinTrip }) => {
     const [destinations, setDestinations] = useState([]);
@@ -62,32 +63,34 @@ const TripsPage = ({ joinedTrips, onJoinTrip }) => {
     };
 
     return (
-        <div>
-            <h1>Search Destinations</h1>
+        <div className='trips-page-container'>
+            <h1 className=''>Search Destinations</h1>
             <div style={{ marginBottom: '20px' }}>
                 <Link to="/joined-trips">View My Joined Trips ({joinedTrips.length})</Link>
             </div>
 
-            <form onSubmit={handleSearch} style={{ marginBottom: '20px' }}>
+            <form onSubmit={handleSearch} className='search-form' >
                 <input
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Enter destination (e.g., Paris)"
-                    style={{ padding: '10px', width: '300px' }}
+                    style={{ padding: '10px', width: '300px', fontSize: '15px', borderRadius: '5px', border: '1px solid #ccc' }}
                 />
-                <button type="submit" style={{ padding: '10px', marginLeft: '10px' }}>Search</button>
+                <button type="submit" style={{ padding: '10px', marginLeft: '15px' }}>Search</button>
             </form>
 
             {loading ? <p>Loading...</p> : (
                 destinations.length > 0 ? (
-                    <ul>
+                    <ul className='destination-list'>
                         {destinations.map(dest => (
-                            <li key={dest.id} style={{ marginBottom: '20px' }}>
+                            <li key={dest.id} style={{ marginBottom: '20px' , padding:'10px', margin: '10px', border: '1px solid #ccc', borderRadius: '5px' }}>
                                 <h3>{dest.name}</h3>
                                 <p>{dest.location}</p>
-                                <p>{dest.description}</p>
-                                {dest.image && <img src={dest.image} alt={dest.name} width="200" />}
+                                {/* <p>{dest.description}</p> */}
+                                <div>
+                                  {dest.image && <img src={dest.image} alt={dest.name} width="400" height="250" border="1px solid black"/>}
+                                </div>
                                 <button
                                     onClick={() =>{ 
                                       console.log('Button clicked for:', dest.id);
@@ -96,12 +99,13 @@ const TripsPage = ({ joinedTrips, onJoinTrip }) => {
 
                                     disabled={joinedTrips.some(joined => joined.id === dest.id)}
                                     style={{ marginTop: '10px', padding: '8px' }}
+                                    className='join-trip-button'
                                 >
                                     {joinedTrips.some(joined => joined.id.toString() === dest.id.toString()) 
                                     ? 'Added' 
                                     : 'Add Trip'
                                     }
-                                    
+
                                 </button>
                             </li>
                         ))}

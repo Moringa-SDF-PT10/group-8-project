@@ -15,7 +15,7 @@ const RegisterForm = () => {
     e.preventDefault();
     const success = await register(name, email, password);
     if (success) {
-      navigate('/profile');
+      navigate('/home');
     } else {
       setError('Registration failed');
     }

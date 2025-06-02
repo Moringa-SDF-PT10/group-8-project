@@ -26,7 +26,7 @@ const LoginForm = () => {
         await login(email, password)
       }
 
-      navigate("/profile")
+      navigate("/")
     } else {
       setError("Invalid email or password. Try: user@example.com / moringa1234!")
     }

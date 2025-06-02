@@ -25,11 +25,11 @@ const NavBar = () => {
           {/* kiarie: Changed <a> to <Link to="..."> */}
           {user ? (
             <>
+              <Link to="/" className="nav-link">Home</Link>
               <Link to="/profile" className="nav-link">Profile</Link>
               <Link to="/trips" className="nav-link">Trips</Link>
               <Link to="/itinerary" className="nav-link">Itinerary</Link>
-              <Link to="/bookings" className="nav-link">Bookings</Link>
-              <Link to="/settings" className="nav-link">Settings</Link>
+
               <Link to="/trip-activities-demo" className="nav-link">Destination & Activities</Link>
               <Link onClick={handleLogout} className="nav-link">Logout</Link>
             </>

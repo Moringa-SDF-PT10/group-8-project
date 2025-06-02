@@ -1,10 +1,10 @@
 *{
     box-sizing: border-box;
+    /* background-color: #f0f0f0 */
+    /* margin: 20px; */
 }
 
-body {
-    background-color: #f0f0f0;
-}
+
 
 .details-container {
     display: flex;
@@ -15,4 +15,64 @@ body {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.trips-page-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    margin: auto 20px ;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.joined-trips-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    margin: auto 20px ;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.destination-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+
+.joined-trips-list{
+    list-style-type: none;
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.join-trip-button {
+    background-color: #4CAF50; 
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: auto;
+    display: flex;
+}
+.join-trip-button:hover {
+    background-color: #45a049; 
+}
+
+.search-form {
+    align-items: center;
+    margin-bottom: 50px;
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Itinerary from '../Itinerary/Itinerary';
+import '../../styles/TripsPage.css';
 
 const TripDetailPage = ({ joinedTrips, onItineraryUpdate }) => {
     const { tripId } = useParams();

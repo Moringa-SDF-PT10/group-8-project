@@ -94,7 +94,8 @@ const handleItineraryUpdate = (tripId, updatedItinerary) => {
       <NavBar />
       <main className="main-content">
         <Routes>
-          <Route path="/" element={<div className=""><HomePage /></div>} />
+
+          <Route path="/" element={<div className=""><ProtectedRoute><HomePage /></ProtectedRoute></div>} />
           <Route path="/about" element={<div className="page-content">About Us</div>} />
           <Route path="/contact" element={<div className="page-content">Contact Us</div>} />
           <Route path="/login" element={<div className="login-container"><LoginForm /></div>} />
