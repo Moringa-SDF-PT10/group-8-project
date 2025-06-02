@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import ItineraryItem from './ItineraryItem';
 import AddItineraryItemForm from './AddItineraryItemForm';
 
-function Itinerary({ tripId, itinerary = [], onItineraryUpdate }) {
+function Itinerary({ itinerary = [], onItineraryUpdate }) {
+  const { tripId } = useParams();
   const [activities, setActivities] = useState(itinerary);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -11,10 +13,6 @@ function Itinerary({ tripId, itinerary = [], onItineraryUpdate }) {
   const API_URL = 'https://my-json-api-lnar.onrender.com/itinerary';
 
   useEffect(() => {
-    
-    setActivities([]);
-    setError(null);
-
     async function fetchItinerary() {
       setLoading(true);
       setError(null);
@@ -25,15 +23,15 @@ function Itinerary({ tripId, itinerary = [], onItineraryUpdate }) {
 
         const data = await res.json();
 
-        // Filter by tripId
-        const filteredData = data.filter(item => item.tripId === tripId);
+       
+        const filteredData = data.filter(item => item.tripId.toString() === tripId.toString());
 
         setActivities(filteredData);
-        onItineraryUpdate(filteredData);
+        if (onItineraryUpdate) onItineraryUpdate(filteredData);
       } catch (err) {
         setError(err.message);
-        setActivities([]); 
-        onItineraryUpdate([]);
+        setActivities([]);
+        if (onItineraryUpdate) onItineraryUpdate([]);
       } finally {
         setLoading(false);
       }
@@ -45,6 +43,7 @@ function Itinerary({ tripId, itinerary = [], onItineraryUpdate }) {
   }, [tripId, onItineraryUpdate]);
 
   const handleAddActivity = async (newActivity) => {
+    setError(null);
     try {
       const activityToAdd = {
         ...newActivity,
@@ -62,13 +61,14 @@ function Itinerary({ tripId, itinerary = [], onItineraryUpdate }) {
       const savedActivity = await res.json();
       const updatedActivities = [...activities, savedActivity];
       setActivities(updatedActivities);
-      onItineraryUpdate(updatedActivities);
+      if (onItineraryUpdate) onItineraryUpdate(updatedActivities);
     } catch (err) {
       setError(err.message);
     }
   };
 
   const handleUpdateActivity = async (updatedActivity) => {
+    setError(null);
     try {
       const res = await fetch(`${API_URL}/${updatedActivity.id}`, {
         method: 'PATCH',
@@ -83,20 +83,21 @@ function Itinerary({ tripId, itinerary = [], onItineraryUpdate }) {
         act.id === updatedData.id ? updatedData : act
       );
       setActivities(updatedList);
-      onItineraryUpdate(updatedList);
+      if (onItineraryUpdate) onItineraryUpdate(updatedList);
     } catch (err) {
       setError(err.message);
     }
   };
 
   const handleDeleteActivity = async (id) => {
+    setError(null);
     try {
       const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
       if (!res.ok) throw new Error('Failed to delete activity');
 
       const updatedList = activities.filter(act => act.id !== id);
       setActivities(updatedList);
-      onItineraryUpdate(updatedList);
+      if (onItineraryUpdate) onItineraryUpdate(updatedList);
     } catch (err) {
       setError(err.message);
     }
@@ -104,7 +105,7 @@ function Itinerary({ tripId, itinerary = [], onItineraryUpdate }) {
 
   return (
     <div className="itinerary-container">
-      <h2 className="itinerary-title">Trip Itinerary</h2>
+      <h2 className="itinerary-title">Trip Itinerary for Trip {tripId}</h2>
 
       {loading && (
         <div className="loading-spinner-container">
@@ -120,6 +121,7 @@ function Itinerary({ tripId, itinerary = [], onItineraryUpdate }) {
           <button
             onClick={() => setShowForm(!showForm)}
             className="toggle-button"
+            disabled={loading}
           >
             {showForm ? 'Hide New Activity Form' : '+ Add New Activity'}
           </button>

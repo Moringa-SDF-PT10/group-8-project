@@ -93,13 +93,13 @@ function App() {
               <MyTripsPage />
             </ProtectedRoute>
           } />
-          <Route path="/itinerary-view" element={
-            <ProtectedRoute>
-              <div className="page-content">
-                <Itinerary tripId={1} />
-              </div>
-            </ProtectedRoute>
-          } />
+          <Route path="/trips/:tripId/itinerary" element={
+             <ProtectedRoute>
+               <div className="page-content">
+                 <Itinerary />
+               </div>
+           </ProtectedRoute>
+         } />
           <Route path="/bookings" element={
             <ProtectedRoute>
               <div className="page-content">Bookings Page</div>
