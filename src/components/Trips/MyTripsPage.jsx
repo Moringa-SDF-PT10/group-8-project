@@ -122,11 +122,11 @@ const TripsPage = ({ joinedTrips, onJoinTrip }) => {
                     >
                         Previous
                     </button>
-                    <span>Page {currentPage + 1}</span>
+                    <span style={{ textAlign:'center'}}>Page {currentPage + 1}</span>
                     <button
                         disabled={(currentPage + 1) * RESULTS_PER_PAGE >= totalResults}
                         onClick={() => setCurrentPage(prev => prev + 1)}
-                        style={{ padding: '10px', marginLeft: '10px' }}
+                        style={{ padding: '10px' }}
                     >
                         Next
                     </button>
