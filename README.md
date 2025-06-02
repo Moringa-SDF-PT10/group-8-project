@@ -1,6 +1,9 @@
 # Group Travel Planner App
 The Group Travel Planner App is a collaborative web platform that makes trip planning easy, fun, and social! Designed for groups of friends, families, or travel enthusiasts, the app allows users to search for destinations, plan for an Itinerary, vote on the activities and organize trips together with ease.
 
+## Netlify Deploy Link
+https://group-travel-planner.netlify.app/
+
 
 # Itinerary Component Features
 
