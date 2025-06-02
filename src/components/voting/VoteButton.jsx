@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 import React, { useState, useEffect } from 'react';
 
@@ -105,6 +106,26 @@ const VoteButton = ({ activityId, initialVotes = 0 }) => {
             </button>
             {error && <p style={{ color: 'red', fontSize: '0.8em', margin: '5px 0 0 0' }}>{error}</p>}
         </div>
+=======
+import React from 'react';
+
+
+const VoteButton = ({ suggestionId, onVote, hasVoted }) => {
+    const handleVoteClick = () => {
+        if (typeof onVote === 'function') {
+            onVote(suggestionId);
+        }
+    };
+
+    return (
+        <button
+            onClick={handleVoteClick}
+            className={`vote-button ${hasVoted ? 'voted' : ''}`}
+            // Button is no longer disabled, so user can click to un-vote
+        >
+            {hasVoted ? 'Unvote' : 'Vote'} {/* Changed text when voted */}
+        </button>
+>>>>>>> main
     );
 };
 

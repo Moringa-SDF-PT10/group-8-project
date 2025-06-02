@@ -1,0 +1,295 @@
+/* CSS Variables for consistent theming */
+:root {
+  --primary-color: #f97316;
+  --primary-hover: #ea580c;
+  --secondary-color: #1e40af;
+  --secondary-light: #3b82f6;
+  --text-primary: #1e3a8a;
+  --text-secondary: #1e40af;
+  --background-white: #ffffff;
+  --border-light: #bfdbfe;
+  --border-focus: #1e40af;
+  --success-color: #16a34a;
+  --error-color: #dc2626;
+  --shadow-light: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --border-radius: 8px;
+  --border-radius-sm: 4px;
+}
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+}
+
+/* Card component */
+.card {
+  max-width: 400px;
+  width: 90%;
+  margin: 0 auto;
+  background-color: var(--background-white);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-medium);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.full-page {
+  min-height: 70vh; /* Ensures the card takes up full page height on login pages */
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.label {
+  display: block;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--border-focus);
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.button-primary {
+  background-color: var(--primary-color);
+  color: var(--background-white);
+  width: 100%;
+}
+
+.button-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.error {
+  color: var(--error-color);
+  margin-bottom: 1rem;
+}
+
+.success {
+  color: var(--success-color);
+  margin-bottom: 1rem;
+}
+
+.text {
+  color: var(--text-secondary);
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-link {
+  color: var(--text-secondary);
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.link {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.trip-list {
+  list-style: none;
+  padding: 0;
+}
+
+.trip-item {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.trip-item:last-child {
+  border-bottom: none;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+/* Navigation styles */ 
+/*johnson: commented the navbar styling to use the navbar css file*/
+/* .navbar {
+  background-color: var(--background-white);
+  box-shadow: var(--shadow-light);
+  padding: 1rem 0;
+
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  
+}
+
+.nav-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 0;
+}
+
+.nav-link:hover {
+  color: var(--primary-color);
+}
+
+.nav-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+} */
+
+/* Responsive Design */
+
+/* Tablets and below (max-width: 768px) */
+@media (max-width: 768px) {
+  .card {
+    width: 85%;
+    padding: 1.5rem;
+  }
+
+  .full-page {
+    min-height: 60vh; /* Adjusted for smaller screens */
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .input,
+  .button {
+    font-size: 0.9rem;
+  }
+
+  .navbar-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .nav-actions {
+    margin-top: 0.5rem;
+  }
+}
+
+/* Mobile phones (max-width: 480px) */
+@media (max-width: 480px) {
+  .card {
+    width: 90%;
+    padding: 1rem;
+  }
+
+  .full-page {
+    min-height: 50vh; /* Adjusted for mobile */
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+  }
+
+  .input,
+  .button {
+    font-size: 0.85rem;
+  }
+
+  .form-group {
+    margin-bottom: 0.75rem;
+  }
+
+  .text-link {
+    font-size: 0.9rem;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .nav-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .nav-actions .button {
+    width: 100%;
+  }
+}
+
+/* Small phones (max-width: 360px) */
+@media (max-width: 360px) {
+  .card {
+    width: 95%;
+    padding: 0.75rem;
+  }
+
+  .card-title {
+    font-size: 1rem;
+  }
+
+  .input,
+  .button {
+    padding: 0.4rem;
+    font-size: 0.8rem;
+  }
+}
