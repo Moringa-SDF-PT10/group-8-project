@@ -4,12 +4,12 @@ import VoteButton from '../voting/VoteButton'; // kiarie
 function ItineraryItem({ activity, onUpdate, onDelete }) {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
-  name: activity.name,
-  time: activity.time,
-  description: activity.description || '',
-  day: activity.day || '',
-  location: activity.location || '',
-});
+    name: activity.name,
+    time: activity.time,
+    description: activity.description || '',
+    day: activity.day || '',
+    location: activity.location || '',
+  });
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -85,13 +85,13 @@ function ItineraryItem({ activity, onUpdate, onDelete }) {
         {error && <p className="error-text">{error}</p>}
 
         <input
-           name="day"
-           className="input-field"
-           type="number"
-           value={formData.day}
-           onChange={handleChange}
-           placeholder="Day Number"
-           disabled={loading}
+          name="day"
+          className="input-field"
+          type="number"
+          value={formData.day}
+          onChange={handleChange}
+          placeholder="Day Number"
+          disabled={loading}
         />
         <input
           name="location"
@@ -176,6 +176,7 @@ function ItineraryItem({ activity, onUpdate, onDelete }) {
           {loading ? 'Deleting...' : 'Delete'}
         </button>
       </div>
+
       {/* kiarie */}
       <VoteButton
         activityId={activity.id}
