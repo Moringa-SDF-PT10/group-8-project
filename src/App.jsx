@@ -19,6 +19,7 @@ import DestinationSuggestions from './components/api_integration/DestinationSugg
 
 import Itinerary from './components/Itinerary/Itinerary.jsx';
 
+
 const INITIAL_MOCK_SUGGESTIONS = [
   { id: 's1', name: 'Visit the Eiffel Tower', description: 'Iconic landmark in Paris.', suggestedBy: 'UserA', votes: 5 },
   { id: 's2', name: 'British Museum Tour', description: 'Explore history and culture.', suggestedBy: 'UserB', votes: 3 },
