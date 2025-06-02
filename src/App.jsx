@@ -140,18 +140,7 @@ function App() {
             </ProtectedRoute>
           } />
 
-          <Route path="/bookings" element={
-            <ProtectedRoute>
-              <div className="page-content">Bookings Page</div>
-            </ProtectedRoute>
-          } />
-
-          <Route path="/settings" element={
-            <ProtectedRoute>
-              <div className="page-content">Settings Page</div>
-            </ProtectedRoute>
-          } />
-
+          
           <Route path="/trip-activities-demo" element={
             <div className="page-content">
               <section className="destination-suggestions-section" style={{ marginBottom: '40px' }}>

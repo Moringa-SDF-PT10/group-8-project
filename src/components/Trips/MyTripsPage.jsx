@@ -21,7 +21,7 @@ const TripsPage = ({ joinedTrips, onJoinTrip }) => {
         const options = {
             method: 'GET',
             headers: {
-                'X-RapidAPI-Key': 'ef1328314dmsh8c261667ea33568p1638dajsnc286eb7fb1ee',
+                'X-RapidAPI-Key': '275d2bb079mshce7ea84f9d52042p1dfb3ajsn27b544e68b50',
                 'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com'
             }
         };
@@ -75,7 +75,7 @@ const TripsPage = ({ joinedTrips, onJoinTrip }) => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Enter destination (e.g., Paris)"
-                    style={{ padding: '10px', width: '300px', fontSize: '15px', borderRadius: '5px', border: '1px solid #ccc' }}
+                    style={{ padding: '10px', marginTop:'14px' , width: '300px', fontSize: '15px', borderRadius: '5px', border: '1px solid #ccc' }}
                 />
                 <button type="submit" style={{ padding: '10px', marginLeft: '15px' }}>Search</button>
             </form>
@@ -122,7 +122,7 @@ const TripsPage = ({ joinedTrips, onJoinTrip }) => {
                     >
                         Previous
                     </button>
-                    <span style={{ textAlign:'center'}}>Page {currentPage + 1}</span>
+                    <span style={{ textAlign:'center', alignItems:'center', justifyItems:'center', display:'flex'}}>Page {currentPage + 1}</span>
                     <button
                         disabled={(currentPage + 1) * RESULTS_PER_PAGE >= totalResults}
                         onClick={() => setCurrentPage(prev => prev + 1)}

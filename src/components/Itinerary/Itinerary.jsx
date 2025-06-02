@@ -1,161 +1,161 @@
+// JavaScript source code
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import ItineraryItem from './ItineraryItem';
 import AddItineraryItemForm from './AddItineraryItemForm';
 
-function Itinerary({ itinerary = [], onItineraryUpdate }) {
-  const { tripId } = useParams();
-  const [activities, setActivities] = useState(itinerary);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [showForm, setShowForm] = useState(false);
+function Itinerary({ tripId, itinerary = [], onItineraryUpdate }) {
+    const [activities, setActivities] = useState(itinerary);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [showForm, setShowForm] = useState(false);
 
-  const API_URL = 'https://my-json-api-lnar.onrender.com/itinerary';
+    const API_URL = 'https://my-json-api-lnar.onrender.com/itinerary';
 
-  useEffect(() => {
-    async function fetchItinerary() {
-      setLoading(true);
-      setError(null);
 
-      try {
-        const res = await fetch(API_URL);
-        if (!res.ok) throw new Error('Failed to fetch itinerary');
+    useEffect(() => {
+        if (activities.length === 0) {
+            fetchItinerary();
+        }
 
-        const data = await res.json();
+        async function fetchItinerary() {
+            setLoading(true);
+            setError(null);
 
-       
-        const filteredData = data.filter(item =>
-          item.tripId != null && tripId != null && item.tripId.toString() === tripId.toString()
-       );
+            try {
+                const res = await fetch(API_URL);
+                if (!res.ok) throw new Error('Failed to fetch itinerary');
 
-        setActivities(filteredData);
-        if (onItineraryUpdate) onItineraryUpdate(filteredData);
-      } catch (err) {
-        setError(err.message);
-        setActivities([]);
+                const data = await res.json();
 
-      } finally {
-        setLoading(false);
-      }
-    }
+                const filteredData = data.filter(activity => activity.tripId === tripId);
 
-    if (tripId) {
-      fetchItinerary();
-    }
-  }, [tripId, onItineraryUpdate]);
+                if (filteredData.length > 0) {
+                    setActivities(filteredData);
+                    onItineraryUpdate(filteredData);
+                }
 
-  const handleAddActivity = async (newActivity) => {
-    setError(null);
-    try {
-      const activityToAdd = {
-        ...newActivity,
-        tripId,
-      };
+            } catch (err) {
+                setError(err.message);
+                // setActivities([]);
+                // onItineraryUpdate([]);
+            } finally {
+                setLoading(false);
+            }
+        }
 
-      const res = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(activityToAdd),
-      });
+        // if (tripId) {
+        //   fetchItinerary();
+        // }
+    }, [tripId, onItineraryUpdate]);
 
-      if (!res.ok) throw new Error('Failed to add activity');
+    const handleAddActivity = async (newActivity) => {
+        try {
+            const activityToAdd = {
+                ...newActivity,
+                tripId,
+            };
 
-      const savedActivity = await res.json();
-      const updatedActivities = [...activities, savedActivity];
-      setActivities(updatedActivities);
-      if (onItineraryUpdate) onItineraryUpdate(updatedActivities);
-    } catch (err) {
-      setError(err.message);
-    }
-  };
+            const res = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(activityToAdd),
+            });
 
-  const handleUpdateActivity = async (updatedActivity) => {
-    setError(null);
-    try {
-      const res = await fetch(`${API_URL}/${updatedActivity.id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedActivity),
-      });
+            if (!res.ok) throw new Error('Failed to add activity');
 
-      if (!res.ok) throw new Error('Failed to update activity');
+            const savedActivity = await res.json();
+            const updatedActivities = [...activities, savedActivity];
+            setActivities(updatedActivities);
+            onItineraryUpdate(updatedActivities);
+        } catch (err) {
+            setError(err.message);
+        }
+    };
 
-      const updatedData = await res.json();
-      const updatedList = activities.map(act =>
-        act.id === updatedData.id ? updatedData : act
-      );
-      setActivities(updatedList);
-      if (onItineraryUpdate) onItineraryUpdate(updatedList);
-    } catch (err) {
-      setError(err.message);
-    }
-  };
+    const handleUpdateActivity = async (updatedActivity) => {
+        try {
+            const res = await fetch(`${API_URL}/${updatedActivity.id}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updatedActivity),
+            });
 
-  const handleDeleteActivity = async (id) => {
-    setError(null);
-    try {
-      const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
-      if (!res.ok) throw new Error('Failed to delete activity');
+            if (!res.ok) throw new Error('Failed to update activity');
 
-      const updatedList = activities.filter(act => act.id !== id);
-      setActivities(updatedList);
-      if (onItineraryUpdate) onItineraryUpdate(updatedList);
-    } catch (err) {
-      setError(err.message);
-    }
-  };
+            const updatedData = await res.json();
+            setActivities((prev) =>
+                prev.map((act) => (act.id === updatedData.id ? updatedData : act))
+            );
+            // setActivities(updatedList);
+            // onItineraryUpdate(updatedList);
+        } catch (err) {
+            setError(err.message);
+        }
+    };
 
-  return (
-    <div className="itinerary-container">
-      <h2 className="itinerary-title">Trip Itinerary for Trip {tripId}</h2>
+    const handleDeleteActivity = async (id) => {
+        try {
+            const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+            if (!res.ok) throw new Error('Failed to delete activity');
 
-      {loading && (
-        <div className="loading-spinner-container">
-          <div className="spinner"></div>
-          <p className="loading-text">Loading itinerary...</p>
+            const updatedList = activities.filter(act => act.id !== id);
+            setActivities(updatedList);
+            onItineraryUpdate(updatedList);
+        } catch (err) {
+            setError(err.message);
+        }
+    };
+
+    return (
+        <div className="itinerary-container">
+            <h2 className="itinerary-title">Trip Itinerary</h2>
+
+            {loading && (
+                <div className="loading-spinner-container">
+                    <div className="spinner"></div>
+                    <p className="loading-text">Loading itinerary...</p>
+                </div>
+            )}
+
+            {error && <p className="error-text">Error: {error}</p>}
+
+            {!loading && !error && (
+                <>
+                    <button
+                        onClick={() => setShowForm(!showForm)}
+                        className="toggle-button"
+                    >
+                        {showForm ? 'Hide New Activity Form' : '+ Add New Activity'}
+                    </button>
+
+                    {showForm && (
+                        <AddItineraryItemForm
+                            tripId={tripId}
+                            onAdd={(newActivity) => {
+                                handleAddActivity(newActivity);
+                                setShowForm(false);
+                            }}
+                        />
+                    )}
+
+                    {activities.length === 0 ? (
+                        <p className="empty-message">No activities planned yet.</p>
+                    ) : (
+                        <ul className="itinerary-list">
+                            {activities.map((activity) => (
+                                <ItineraryItem
+                                    key={activity.id}
+                                    activity={activity}
+                                    onUpdate={handleUpdateActivity}
+                                    onDelete={handleDeleteActivity}
+                                />
+                            ))}
+                        </ul>
+                    )}
+                </>
+            )}
         </div>
-      )}
-
-      {error && <p className="error-text">Error: {error}</p>}
-
-      {!loading && !error && (
-        <>
-          <button
-            onClick={() => setShowForm(!showForm)}
-            className="toggle-button"
-            disabled={loading}
-          >
-            {showForm ? 'Hide New Activity Form' : '+ Add New Activity'}
-          </button>
-
-          {showForm && (
-            <AddItineraryItemForm
-              tripId={tripId}
-              onAdd={(newActivity) => {
-                handleAddActivity(newActivity);
-                setShowForm(false);
-              }}
-            />
-          )}
-
-          {activities.length === 0 ? (
-            <p className="empty-message">No activities planned yet.</p>
-          ) : (
-            <ul className="itinerary-list">
-              {activities.map((activity) => (
-                <ItineraryItem
-                  key={activity.id}
-                  activity={activity}
-                  onUpdate={handleUpdateActivity}
-                  onDelete={handleDeleteActivity}
-                />
-              ))}
-            </ul>
-          )}
-        </>
-      )}
-    </div>
-  );
+    );
 }
 
 export default Itinerary;
