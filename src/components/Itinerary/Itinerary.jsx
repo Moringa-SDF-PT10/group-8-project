@@ -24,7 +24,9 @@ function Itinerary({ itinerary = [], onItineraryUpdate }) {
         const data = await res.json();
 
        
-        const filteredData = data.filter(item => item.tripId.toString() === tripId.toString());
+        const filteredData = data.filter(item =>
+          item.tripId != null && tripId != null && item.tripId.toString() === tripId.toString()
+       );
 
         setActivities(filteredData);
         if (onItineraryUpdate) onItineraryUpdate(filteredData);
