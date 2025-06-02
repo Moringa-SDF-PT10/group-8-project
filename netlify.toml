@@ -1,18 +1,26 @@
 [build]
+  base = "/"
   command = "npm run build"
   publish = "dist"
+  functions = "netlify/functions"  # Recommended functions location
 
+[build.environment]
+  NODE_VERSION = "18"  # Vite typically needs Node 16+
+  NPM_VERSION = "9"
+
+# Environment variables (note VITE_ prefix)
+[context.production.environment]
+  VITE_API_URL = "https://api.yourservice.com"
+
+# For Single Page Applications
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
+# Optional headers for security
 [[headers]]
-  for = "/assets/*"
+  for = "/*"
   [headers.values]
-    Content-Type = "application/javascript"
-
-[[headers]]
-  for = "/index.html"
-  [headers.values]
-    Content-Type = "text/html; charset=UTF-8"
+    X-Frame-Options = "DENY"
+    Content-Security-Policy = "default-src 'self'"
