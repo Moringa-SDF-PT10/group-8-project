@@ -60,8 +60,8 @@ Open your browser and go to http://localhost:5173.
 This project is open-source and available under the MIT License.
 
 # Authors
-Ivan - (Group Leader)
-Emmah
-Anthony
-Johnson
-Collins
+- Ivan - (Group Leader)
+- Emmah
+- Anthony
+- Johnson
+- Collins
