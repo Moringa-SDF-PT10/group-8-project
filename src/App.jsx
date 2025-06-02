@@ -71,7 +71,7 @@ function App() {
           <Route path="/profile" element={<ProtectedRoute><div className="page-content"><ProfileInfo /></div></ProtectedRoute>} />
           <Route path="/trips" element={<ProtectedRoute><MyTripsPage /></ProtectedRoute>} />
 
-          <Route path="/itinerary-view" element={
+          <Route path="/itinerary" element={
             <ProtectedRoute>
               <div className="page-content">
                 <Itinerary tripId={1} />
