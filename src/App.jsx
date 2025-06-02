@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Routes, Route } from "react-router-dom";
-import { useAuth } from "./context/AuthContext";
-import ProtectedRoute from "./components/profile/ProtectedRoute";
-import NavBar from "./components/profile/NavBar";
-import LoginForm from "./components/profile/LoginForm";
-import RegisterForm from "./components/profile/RegisterForm";
-import ResetPasswordForm from "./components/profile/ResetPasswordForm";
-import ProfileInfo from "./components/profile/ProfileInfo";
-import MyTripsPage from "./components/Trips/MyTripsPage";
-import JoinedTripsPage from "./components/Trips/JoinedTripsPage";
-import TripDetailPage from "./components/Trips/TripDetailPage";
-import HomePage from "./components/home/Hompage";
+import { useAuth } from "./context/AuthContext.jsx";
+import ProtectedRoute from "./components/profile/ProtectedRoute.jsx";
+import NavBar from "./components/profile/NavBar.jsx";
+import LoginForm from "./components/profile/LoginForm.jsx";
+import RegisterForm from "./components/profile/RegisterForm.jsx";
+import ResetPasswordForm from "./components/profile/ResetPasswordForm.jsx";
+import ProfileInfo from "./components/profile/ProfileInfo.jsx";
+import MyTripsPage from "./components/Trips/MyTripsPage.jsx";
+import JoinedTripsPage from "./components/Trips/JoinedTripsPage.jsx";
+import TripDetailPage from "./components/Trips/TripDetailPage.jsx";
+import HomePage from "./components/home/Hompage.jsx";
 
 import AddActivityForm from './components/voting/AddActivityForm';
 import ActivitySuggestions from './components/voting/ActivitySuggestions';
@@ -30,6 +30,7 @@ function App() {
   const [mockSuggestions, setMockSuggestions] = useState(INITIAL_MOCK_SUGGESTIONS);
   const [userVotes, setUserVotes] = useState({});
   const [joinedTrips, setJoinedTrips] = useState([]);
+  
 
   const handleAddSuggestion = (newSuggestionData) => {
     const suggesterName = user ? user.name : 'Anonymous';
@@ -167,7 +168,9 @@ function App() {
         </Routes>
       </main>
     </div>
+    
   );
+  
 }
 
 export default App;
