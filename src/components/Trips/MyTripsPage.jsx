@@ -1,85 +1,156 @@
-import React, { useState } from 'react';
-import TripList from './TripList';
-import TripDetails from './TripDetails';
-import JoinTripForm from './JoinTripForm';
-import '../../styles/TripsPage.css';
+import React, { useState, useEffect } from 'react';
+import Itinerary from '../Itinerary/Itinerary';
+import { Link } from 'react-router-dom';
 
-const MyTripsPage = () => {
-  const [trips, setTrips] = useState([
-    {
-      id: 1,
-      name: "Paris Adventure",
-      destination: "Paris, France",
-      startDate: "2025-07-01",
-      endDate: "2025-07-10",
-      participants: ["Alice", "Bob", "Charlie"],
-      code: "PARIS123",
-    },
-    {
-      id: 2,
-      name: "Beach Getaway",
-      destination: "Bali, Indonesia",
-      startDate: "2025-08-15",
-      endDate: "2025-08-22",
-      participants: ["Dana", "Eva", "Frank"],
-      code: "BALI456",
-    },
-    {
-      id: 3,
-      name: "Mountain Hike",
-      destination: "Rocky Mountains, USA",
-      startDate: "2025-09-10",
-      endDate: "2025-09-17",
-      participants: ["George", "Hannah", "Ian"],
-      code: "HIKE789",
-    },
-  ]);
+const TripsPage = ({ joinedTrips, onJoinTrip }) => {
+    const [destinations, setDestinations] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('paris');
+    const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [totalResults, setTotalResults] = useState(0);
+    const [selectedTrip, setSelectedTrip] = useState(null);
+    const RESULTS_PER_PAGE = 10;
 
-  const [joinedTrips, setJoinedTrips] = useState([]); // List of joined trips
-  const [selectedTripId, setSelectedTripId] = useState(null);
+    const fetchDestinations = async () => {
+        if (!searchQuery) return;
+        setLoading(true);
+        const offset = currentPage * RESULTS_PER_PAGE;
+        const url = `https://travel-advisor.p.rapidapi.com/locations/search?query=${encodeURIComponent(searchQuery)}&limit=${RESULTS_PER_PAGE}&offset=${offset}&units=km&currency=USD&sort=relevance&lang=en_US`;
 
-  const handleSelectTrip = (tripId) => {
-    setSelectedTripId(tripId);
-  };
+        const options = {
+            method: 'GET',
+            headers: {
+                'X-RapidAPI-Key': 'ef1328314dmsh8c261667ea33568p1638dajsnc286eb7fb1ee',
+                'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com'
+            }
+        };
 
-  const handleJoinTrip = (tripCode) => {
-    const trip = trips.find((t) => t.code.toLowerCase() === tripCode.toLowerCase());
-    if (trip) {
-      if (!joinedTrips.some((jt) => jt.id === trip.id)) {
-        setJoinedTrips([...joinedTrips, trip]);
-        alert(`Successfully joined trip: ${trip.name}`);
-      } else {
-        alert(`You've already joined this trip.`);
-      }
-    } else {
-      alert(`No trip found with code: ${tripCode}`);
-    }
-  };
+        try {
+            const response = await fetch(url, options);
+            const result = await response.json();
+            console.log(result);
 
-  const selectedTrip = trips.find((trip) => trip.id === selectedTripId);
+            const transformedData = result.data.map((item, index) => ({
+                id: offset + index + 1,
+                name: item.result_object.name,
+                location: item.result_object.location_string,
+                description: item.result_object.description || 'No description',
+                image: item.result_object.photo?.images?.medium?.url,
+            }));
 
-  return (
-    <div className="p-6 space-y-6 m-a">
-      <h1 className="text- font-bold text-blue-800">My Trips</h1>
+            setDestinations(transformedData);
+            setTotalResults(result.paging?.total_results || (offset + transformedData.length));
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            setDestinations([]);
+        } finally {
+            setLoading(false);
+        }
+    };
 
-      {/* Join Trip Form */}
-      <JoinTripForm onJoin={handleJoinTrip} />
+    useEffect(() => {
+        fetchDestinations();
+    }, [currentPage, searchQuery]); // Updated to fetch when searchQuery or page changes
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Trip List */}
+    const handleSearch = (e) => {
+        e.preventDefault();
+        setCurrentPage(0); // Reset page and trigger fetch via useEffect
+    };
+
+    const handleSelectTrip = (trip) => {
+        setSelectedTrip(trip);
+    };
+
+    return (
         <div>
-          <h2 className="text-2xl font-semibold mb-2">All Trips</h2>
-          <TripList trips={joinedTrips.length > 0 ? joinedTrips : trips} onSelectTrip={handleSelectTrip} />
-        </div>
+            <h1>Search Destinations</h1>
+            <div style={{ marginBottom: '20px' }}>
+                <Link to="/joined-trips">View My Joined Trips ({joinedTrips.length})</Link>
+            </div>
 
-        {/* Trip Details */}
-        <div>
-          <h2 className="text-2xl font-semibold mb-2">Trip Details</h2>
-          <TripDetails trip={selectedTrip} />
+            <form onSubmit={handleSearch} style={{ marginBottom: '20px' }}>
+                <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Enter destination (e.g., Paris)"
+                    style={{ padding: '10px', width: '300px' }}
+                />
+                <button type="submit" style={{ padding: '10px', marginLeft: '10px' }}>Search</button>
+            </form>
+
+            {loading ? <p>Loading...</p> : (
+                destinations.length > 0 ? (
+                    <ul>
+                        {destinations.map(dest => (
+                            <li key={dest.id} style={{ marginBottom: '20px' }}>
+                                <h3>{dest.name}</h3>
+                                <p>{dest.location}</p>
+                                <p>{dest.description}</p>
+                                {dest.image && <img src={dest.image} alt={dest.name} width="200" />}
+                                <button
+                                    onClick={() =>{ 
+                                      console.log('Button clicked for:', dest.id);
+                                      onJoinTrip(dest)
+                                    }}
+
+                                    disabled={joinedTrips.some(joined => joined.id === dest.id)}
+                                    style={{ marginTop: '10px', padding: '8px' }}
+                                >
+                                    {joinedTrips.some(joined => joined.id.toString() === dest.id.toString()) 
+                                    ? 'Added' 
+                                    : 'Add Trip'
+                                    }
+                                    
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                ) : <p>No destinations found. Try a different search.</p>
+            )}
+
+            {destinations.length > 0 && (
+                <div style={{ marginTop: '20px' }}>
+                    <button
+                        disabled={currentPage === 0}
+                        onClick={() => setCurrentPage(prev => Math.max(prev - 1, 0))}
+                        style={{ padding: '10px', marginRight: '10px' }}
+                    >
+                        Previous
+                    </button>
+                    <span>Page {currentPage + 1}</span>
+                    <button
+                        disabled={(currentPage + 1) * RESULTS_PER_PAGE >= totalResults}
+                        onClick={() => setCurrentPage(prev => prev + 1)}
+                        style={{ padding: '10px', marginLeft: '10px' }}
+                    >
+                        Next
+                    </button>
+                </div>
+            )}
+            
+            {selectedTrip && (
+                <div style={{ marginTop: '40px', border: '1px solid #ccc', padding: '20px' }}>
+                    <h2>Itinerary for {selectedTrip.name}</h2>
+                    <button onClick={() => setSelectedTrip(null)}>Back to Trips</button>
+                    <Itinerary
+                        tripId={selectedTrip.id}
+                        itinerary={selectedTrip.itinerary}
+                        onItineraryUpdate={(updatedItinerary) => {
+                            setJoinedTrips(prev =>
+                                prev.map(trip =>
+                                    trip.id === selectedTrip.id
+                                        ? { ...trip, itinerary: updatedItinerary }
+                                        : trip
+                                )
+                            );
+                            setSelectedTrip(prev => ({ ...prev, itinerary: updatedItinerary }));
+                        }}
+                    />
+                </div>
+            )}
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
-export default MyTripsPage;
+export default TripsPage;

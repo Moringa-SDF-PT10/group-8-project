@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect, useCallback} from "react";
 import { Routes, Route } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
 import ProtectedRoute from "./components/profile/ProtectedRoute";
@@ -8,6 +8,8 @@ import RegisterForm from "./components/profile/RegisterForm";
 import ResetPasswordForm from "./components/profile/ResetPasswordForm";
 import ProfileInfo from "./components/profile/ProfileInfo";
 import MyTripsPage from "./components/Trips/MyTripsPage";
+import JoinedTripsPage from './components/Trips/JoinedTripsPage';
+import TripDetailPage from './components/Trips/TripDetailPage';
 import HomePage from "./components/home/Hompage";
 import "./styles/App.css";
 
@@ -57,6 +59,36 @@ function App() {
     }
   };
 
+const [joinedTrips, setJoinedTrips] = useState([]);
+
+  useEffect(() => {
+      const savedTrips = localStorage.getItem('joinedTrips');
+      if (savedTrips) {
+        setJoinedTrips(JSON.parse(savedTrips));
+      }
+    }, []);
+
+    useEffect(() => {
+      localStorage.setItem('joinedTrips', JSON.stringify(joinedTrips));
+    }, [joinedTrips]);
+
+const handleJoinTrip = useCallback((trip) => {
+  setJoinedTrips(prev => {
+    if (prev.some(joined => joined.id === trip.id)) {
+      return prev;
+    }
+    return [...prev, { ...trip, itinerary: [] }];
+  });
+}, []);
+
+const handleItineraryUpdate = (tripId, updatedItinerary) => {
+    setJoinedTrips(prev =>
+        prev.map(trip =>
+            trip.id === tripId ? { ...trip, itinerary: updatedItinerary } : trip
+        )
+    );
+};
+
   return (
     <div className="app">
       <NavBar />
@@ -69,7 +101,36 @@ function App() {
           <Route path="/register" element={<div className="login-container"><RegisterForm /></div>} />
           <Route path="/reset-password" element={<div className="login-container"><ResetPasswordForm /></div>} />
           <Route path="/profile" element={<ProtectedRoute><div className="page-content"><ProfileInfo /></div></ProtectedRoute>} />
-          <Route path="/trips" element={<ProtectedRoute><MyTripsPage /></ProtectedRoute>} />
+
+          <Route 
+          path="/trips" 
+          element={
+            <ProtectedRoute>
+              <MyTripsPage 
+                joinedTrips={joinedTrips} 
+                onJoinTrip={handleJoinTrip}
+                />
+            </ProtectedRoute>
+            } 
+          />
+
+          <Route 
+            path="/joined-trips" 
+            element={
+              <JoinedTripsPage 
+                joinedTrips={joinedTrips} 
+              />
+            } 
+          />
+          <Route 
+            path="/trip/:tripId" 
+            element={
+              <TripDetailPage 
+                joinedTrips={joinedTrips}
+                onItineraryUpdate={handleItineraryUpdate}
+              />
+            } 
+          />
 
           <Route path="/itinerary" element={
             <ProtectedRoute>

@@ -4,17 +4,19 @@ import AddItineraryItemForm from './AddItineraryItemForm';
 
 function Itinerary ({ tripId , itinerary = [], onItineraryUpdate}) {
   const [activities, setActivities] = useState (itinerary);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [showForm, setShowForm] = useState(false);
 
   const API_URL = 'https://my-json-api-lnar.onrender.com/itinerary';
 
-   useEffect(() => {
-        setActivities(itinerary);
-    }, [itinerary]);
 
   useEffect(() => {
+
+     if (activities.length === 0) {
+      fetchItinerary();
+    }
+
     async function fetchItinerary() {
       try {
         setLoading(true);
@@ -24,7 +26,16 @@ function Itinerary ({ tripId , itinerary = [], onItineraryUpdate}) {
         if (!res.ok) throw new Error('Failed to fetch itinerary');
 
         const data = await res.json();
-        setActivities(data);
+        // setActivities(data);
+
+        const filteredData = data.filter(item => item.tripId === tripId);
+        
+        // Only set activities if we got new data
+        if (filteredData.length > 0) {
+          setActivities(filteredData);
+          onItineraryUpdate(filteredData);
+        }
+
       } catch (err) {
         setError(err.message);
       }  finally {
@@ -32,23 +43,30 @@ function Itinerary ({ tripId , itinerary = [], onItineraryUpdate}) {
       }    
     }
 
-    fetchItinerary();
+    // fetchItinerary();
   },  [tripId]);
 
    const handleAddActivity = async (newActivity) => {
     try {
+      const activityToAdd = {
+        ...newActivity,
+        tripId: tripId
+      };
+
       const res = await fetch(API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(newActivity),
+        body: JSON.stringify(activityToAdd),
       });
 
       if (!res.ok) throw new Error('Failed to add activity');
 
       const savedActivity = await res.json();
-      setActivities((prev) => [...prev, savedActivity]);
+      const updatedActivities = [...activities, savedActivity];
+      setActivities(updatedActivities);
+      onItineraryUpdate(updatedActivities);
       
     } catch (err) {
       setError(err.message);
