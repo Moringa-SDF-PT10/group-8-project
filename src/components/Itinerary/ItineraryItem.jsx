@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import VoteButton from '../voting/VoteButton'; // kiarie
 
 function ItineraryItem({ activity, onUpdate, onDelete }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -175,6 +176,12 @@ function ItineraryItem({ activity, onUpdate, onDelete }) {
           {loading ? 'Deleting...' : 'Delete'}
         </button>
       </div>
+      {/* kiarie */}
+      <VoteButton
+        activityId={activity.id}
+        initialVotes={activity.votes || 0}
+      />
+      {/* kiarie */}
     </li>
   );
 }
