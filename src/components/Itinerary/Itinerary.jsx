@@ -2,13 +2,17 @@ import React, { useState, useEffect } from 'react';
 import ItineraryItem from './ItineraryItem';
 import AddItineraryItemForm from './AddItineraryItemForm';
 
-function Itinerary ({ tripId }) {
-  const [activities, setActivities] = useState ([]);
+function Itinerary ({ tripId , itinerary = [], onItineraryUpdate}) {
+  const [activities, setActivities] = useState (itinerary);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showForm, setShowForm] = useState(false);
 
   const API_URL = 'https://my-json-api-lnar.onrender.com/itinerary';
+
+   useEffect(() => {
+        setActivities(itinerary);
+    }, [itinerary]);
 
   useEffect(() => {
     async function fetchItinerary() {

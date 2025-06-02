@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 
 
-function AddItineraryItemForm ({ tripId, onAdd }) {
+function AddItineraryItemForm ({ tripId, onAdd , onCancel}) {
   const[formData, setFormData] = useState({
     name: '',
     time: '',
     description: '',
     day: '',
     location: '',
+    tripId: tripId
   });
 
   const [submitting, setSubmitting] = useState(false);
@@ -55,7 +56,7 @@ function AddItineraryItemForm ({ tripId, onAdd }) {
   return (
     <form onSubmit={handleSubmit} className="add-itinerary-form">
       <h4>Add New Activity</h4>
-      {error && <p className="error-text">{error}</p>}
+      {error && <p className="error-text"  style={{ color: 'red', marginBottom: '10px' }}>{error}</p>}
 
       <label htmlFor="day">Day:</label>
       <input
@@ -105,9 +106,36 @@ function AddItineraryItemForm ({ tripId, onAdd }) {
         placeholder="Description"
       />
 
-      <button type="submit" disabled={submitting}>
-        {submitting ? 'Adding...' : 'Add Activity'}
-      </button>
+      <div style={{ display: 'flex', gap: '10px', marginTop: '15px' }}>
+                <button
+                    type="submit"
+                    disabled={submitting}
+                    style={{
+                        padding: '8px 15px',
+                        backgroundColor: '#4CAF50',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '4px',
+                        cursor: 'pointer'
+                    }}
+                >
+                    {submitting ? 'Adding...' : 'Add Activity'}
+                </button>
+                <button
+                    type="button"
+                    onClick={onCancel}
+                    style={{
+                        padding: '8px 15px',
+                        backgroundColor: '#f44336',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '4px',
+                        cursor: 'pointer'
+                    }}
+                >
+                    Cancel
+                </button>
+            </div>
     </form>
   );
 }
