@@ -7,7 +7,7 @@ import LoginForm from "./components/profile/LoginForm";
 import RegisterForm from "./components/profile/RegisterForm";
 import ResetPasswordForm from "./components/profile/ResetPasswordForm";
 import ProfileInfo from "./components/profile/ProfileInfo";
-import MyTripsPage from "./components/Trips/MyTripsPage"; 
+import MyTripsPage from "./components/Trips/MyTripsPage";
 import HomePage from "./components/home/Hompage";
 import "./styles/App.css";
 
@@ -16,6 +16,8 @@ import ActivitySuggestions from './components/voting/ActivitySuggestions';
 import './components/voting/voting.css';
 
 import DestinationSuggestions from './components/api_integration/DestinationSuggestions';
+
+import Itinerary from './components/Itinerary/Itinerary.jsx';
 
 const INITIAL_MOCK_SUGGESTIONS = [
   { id: 's1', name: 'Visit the Eiffel Tower', description: 'Iconic landmark in Paris.', suggestedBy: 'UserA', votes: 5 },
@@ -74,17 +76,39 @@ function App() {
       <NavBar />
       <main className="main-content">
         <Routes>
-          <Route path="/" element={<div className=""><HomePage /></div>} />
+          <Route path="/" element={<div><HomePage /></div>} />
           <Route path="/about" element={<div className="page-content">About Us</div>} />
           <Route path="/contact" element={<div className="page-content">Contact Us</div>} />
           <Route path="/login" element={<div className="login-container"><LoginForm /></div>} />
           <Route path="/register" element={<div className="login-container"><RegisterForm /></div>} />
           <Route path="/reset-password" element={<div className="login-container"><ResetPasswordForm /></div>} />
-          <Route path="/profile" element={<ProtectedRoute><div className="page-content"><ProfileInfo /></div></ProtectedRoute>} />
-          <Route path="/trips" element={<ProtectedRoute><MyTripsPage /></ProtectedRoute>} />
-          <Route path="/itinerary" element={<ProtectedRoute><div className="page-content">Itinerary Page</div></ProtectedRoute>} />
-          <Route path="/bookings" element={<ProtectedRoute><div className="page-content">Bookings Page</div></ProtectedRoute>} />
-          <Route path="/settings" element={<ProtectedRoute><div className="page-content">Settings Page</div></ProtectedRoute>} />
+          <Route path="/profile" element={
+            <ProtectedRoute>
+              <div className="page-content"><ProfileInfo /></div>
+            </ProtectedRoute>
+          } />
+          <Route path="/trips" element={
+            <ProtectedRoute>
+              <MyTripsPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/itinerary-view" element={
+            <ProtectedRoute>
+              <div className="page-content">
+                <Itinerary tripId={1} />
+              </div>
+            </ProtectedRoute>
+          } />
+          <Route path="/bookings" element={
+            <ProtectedRoute>
+              <div className="page-content">Bookings Page</div>
+            </ProtectedRoute>
+          } />
+          <Route path="/settings" element={
+            <ProtectedRoute>
+              <div className="page-content">Settings Page</div>
+            </ProtectedRoute>
+          } />
 
           <Route
             path="/trip-activities-demo"

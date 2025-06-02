@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 
 // Mock API calls
@@ -8,6 +9,19 @@ const mockRecordVoteApi = async (activityId /*, userId */) => {
 };
 
 const mockUnvoteApi = async (activityId /*, userId */) => {
+
+
+import React, { useState, useEffect } from 'react';
+
+// Mock API calls
+const mockRecordVoteApi = async (activityId, /* userId */) => {
+    console.log(`MOCK API: Voted for activity ${activityId}`);
+    await new Promise(resolve => setTimeout(resolve, 300));
+    return { success: true };
+};
+
+const mockUnvoteApi = async (activityId, /* userId */) => {
+
     console.log(`MOCK API: Unvoted for activity ${activityId}`);
     await new Promise(resolve => setTimeout(resolve, 300));
     return { success: true };
@@ -21,6 +35,7 @@ const VoteButton = ({ activityId, initialVotes = 0 }) => {
 
     useEffect(() => {
         setVoteCount(initialVotes);
+
     }, [initialVotes]);
 
     const handleVoteToggle = async () => {
@@ -50,6 +65,7 @@ const VoteButton = ({ activityId, initialVotes = 0 }) => {
         } catch (err) {
             console.error("Error voting/unvoting:", err);
             setError(err.message || "Failed to process vote.");
+
         } finally {
             setIsLoading(false);
         }
@@ -85,6 +101,7 @@ const VoteButton = ({ activityId, initialVotes = 0 }) => {
         cursor: 'not-allowed',
     };
 
+
     return (
         <div className="vote-button-container" style={{ marginTop: '10px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
             <button
@@ -102,5 +119,6 @@ const VoteButton = ({ activityId, initialVotes = 0 }) => {
         </div>
     );
 };
+
 
 export default VoteButton;
