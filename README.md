@@ -1,11 +1,9 @@
 # Group Travel Planner App
 The Group Travel Planner App is a collaborative web platform that makes trip planning easy, fun, and social! Designed for groups of friends, families, or travel enthusiasts, the app allows users to search for destinations, plan for an Itinerary, vote on the activities and organize trips together with ease.
 
-## Netlify Deploy Link
-https://group-travel-planner.netlify.app/
 
-
-# Itinerary Component Features
+# 🚀 Features
+## Itinerary Component Features
 
 - Fetch and display a list of itinerary activities for a given trip.
 - Add new activities with details such as day, location, name, time, and description.
@@ -14,27 +12,37 @@ https://group-travel-planner.netlify.app/
 - Loading and error handling states.
 - Responsive UI with form validation.
 
-# Trips Component Features
+## Trips Component Features
 
 - Destination Search powered by the Travel Advisor API.
 - Manage Your Trips — joined trips in your dashboard.
 - Dynamic Pagination & Search for efficient browsing of destination results.
 - View Destination and Trip Details
 
-# How it works
-1. Sign up / Log in to access features
-2. Search for a destination and view details
-3. Add a Destination by pressing the add button
-4. View the destination in the JoinedTrips page and add activities to the trip
-5. Other group members can thereafter vote on the activities created
+## Voting Component Features
 
-# Technologies Used
+- Group members can vote on the activities to be done 
+
+
+# ⚙️ Technologies Used
 
 - React (functional components, hooks)
 - Fetch API for HTTP requests
 - JSON server or mock REST API backend (https://my-json-api-lnar.onrender.com/itinerary)
 - Travel Advisor API (via RapidAPI) (https://travel-advisor.p.rapidapi.com)
 - CSS
+- Visual Studio Code – Development environment
+- Git & GitHub – Version control and collaboration
+
+# Deployment
+- Netlify - https://group-travel-planner.netlify.app/
+
+# 🧪 How it works
+1. Sign up / Log in to access features
+2. Search for a destination and view details
+3. Add a Destination by pressing the add button
+4. View the destination in the JoinedTrips page and add activities to the trip
+5. Other group members can thereafter vote on the activities created
 
 # Installation and setup
 
@@ -46,5 +54,14 @@ cd group-8-project
 npm install
 npm run dev
 Open your browser and go to http://localhost:5173.
+```
 
+# 📜 License
+This project is open-source and available under the MIT License.
 
+# Authors
+Ivan - (Group Leader)
+Emmah
+Anthony
+Johnson
+Collins
