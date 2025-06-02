@@ -1,19 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
 
-
 // Mock API calls
 const mockRecordVoteApi = async (activityId, /* userId */) => {
     console.log(`MOCK API: Voted for activity ${activityId}`);
     await new Promise(resolve => setTimeout(resolve, 300));
     return { success: true };
 };
-    return { success: true };
-};
 
-const mockUnvoteApi = async (activityId, /* userId */) => {
-    console.log(`MOCK API: Unvoted for activity ${activityId}`);
-    await new Promise(resolve => setTimeout(resolve, 300));
 const mockUnvoteApi = async (activityId, /* userId */) => {
     console.log(`MOCK API: Unvoted for activity ${activityId}`);
     await new Promise(resolve => setTimeout(resolve, 300));
@@ -24,7 +18,6 @@ const VoteButton = ({ activityId, initialVotes = 0 }) => {
     const [voteCount, setVoteCount] = useState(initialVotes);
     const [isLoading, setIsLoading] = useState(false);
     const [hasVoted, setHasVoted] = useState(false); // Renamed for clarity
-    const [hasVoted, setHasVoted] = useState(false); // Renamed for clarity
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -33,10 +26,8 @@ const VoteButton = ({ activityId, initialVotes = 0 }) => {
     }, [initialVotes]);
 
     const handleVoteToggle = async () => {
-    const handleVoteToggle = async () => {
         setIsLoading(true);
         setError(null);
-
 
         try {
             if (hasVoted) {
