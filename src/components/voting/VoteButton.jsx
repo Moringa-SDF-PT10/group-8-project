@@ -1,16 +1,13 @@
-<<<<<<< HEAD
-
 import React, { useState, useEffect } from 'react';
 
-
 // Mock API calls
-const mockRecordVoteApi = async (activityId, /* userId */) => {
+const mockRecordVoteApi = async (activityId /*, userId */) => {
     console.log(`MOCK API: Voted for activity ${activityId}`);
     await new Promise(resolve => setTimeout(resolve, 300));
     return { success: true };
 };
 
-const mockUnvoteApi = async (activityId, /* userId */) => {
+const mockUnvoteApi = async (activityId /*, userId */) => {
     console.log(`MOCK API: Unvoted for activity ${activityId}`);
     await new Promise(resolve => setTimeout(resolve, 300));
     return { success: true };
@@ -24,7 +21,6 @@ const VoteButton = ({ activityId, initialVotes = 0 }) => {
 
     useEffect(() => {
         setVoteCount(initialVotes);
-
     }, [initialVotes]);
 
     const handleVoteToggle = async () => {
@@ -54,7 +50,6 @@ const VoteButton = ({ activityId, initialVotes = 0 }) => {
         } catch (err) {
             console.error("Error voting/unvoting:", err);
             setError(err.message || "Failed to process vote.");
-        
         } finally {
             setIsLoading(false);
         }
@@ -90,7 +85,6 @@ const VoteButton = ({ activityId, initialVotes = 0 }) => {
         cursor: 'not-allowed',
     };
 
-
     return (
         <div className="vote-button-container" style={{ marginTop: '10px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
             <button
@@ -106,26 +100,6 @@ const VoteButton = ({ activityId, initialVotes = 0 }) => {
             </button>
             {error && <p style={{ color: 'red', fontSize: '0.8em', margin: '5px 0 0 0' }}>{error}</p>}
         </div>
-=======
-import React from 'react';
-
-
-const VoteButton = ({ suggestionId, onVote, hasVoted }) => {
-    const handleVoteClick = () => {
-        if (typeof onVote === 'function') {
-            onVote(suggestionId);
-        }
-    };
-
-    return (
-        <button
-            onClick={handleVoteClick}
-            className={`vote-button ${hasVoted ? 'voted' : ''}`}
-            // Button is no longer disabled, so user can click to un-vote
-        >
-            {hasVoted ? 'Unvote' : 'Vote'} {/* Changed text when voted */}
-        </button>
->>>>>>> main
     );
 };
 
