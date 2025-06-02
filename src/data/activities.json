@@ -1,0 +1,553 @@
+
+{
+  "trip_id": "MAJESTIC-EASTAFRICA",
+  "itinerary": [
+    {
+      "day": 1,
+      "name": "Guided City Tour",
+      "time": "08:00",
+      "description": "Explore Nairobi with a knowledgeable guide.",
+      "location": "Nairobi, Kenya"
+    },
+    {
+      "day": 1,
+      "name": "Local Market Visit",
+      "time": "11:00",
+      "description": "Experience the vibrant local markets.",
+      "location": "Nairobi, Kenya"
+    },
+    {
+      "day": 1,
+      "name": "Cultural Museum Tour",
+      "time": "14:00",
+      "description": "Visit the national museum to learn about Kenyan culture.",
+      "location": "Nairobi, Kenya"
+    },
+    {
+      "day": 1,
+      "name": "Sunset Boat Ride",
+      "time": "17:00",
+      "description": "Relax on a boat ride watching the sunset.",
+      "location": "Nairobi, Kenya"
+    },
+    {
+      "day": 2,
+      "name": "Game Drive Safari",
+      "time": "08:00",
+      "description": "Explore Maasai Mara wildlife with a guided safari.",
+      "location": "Maasai Mara, Kenya"
+    },
+    {
+      "day": 2,
+      "name": "Visit Maasai Market",
+      "time": "11:00",
+      "description": "Browse traditional Maasai crafts and souvenirs.",
+      "location": "Maasai Mara, Kenya"
+    },
+    {
+      "day": 2,
+      "name": "Cultural Museum Tour",
+      "time": "14:00",
+      "description": "Learn about the Maasai culture and history.",
+      "location": "Maasai Mara, Kenya"
+    },
+    {
+      "day": 2,
+      "name": "Evening Bush Dinner Experience",
+      "time": "17:00",
+      "description": "Enjoy dinner while watching the sunset.",
+      "location": "Maasai Mara, Kenya"
+    },
+    {
+      "day": 3,
+      "name": "Boat Ride on Lake Naivasha",
+      "time": "08:00",
+      "description": "Scenic boat ride to see hippos and birdlife.",
+      "location": "Naivasha, Kenya"
+    },
+    {
+      "day": 3,
+      "name": "Local Market Visit",
+      "time": "11:00",
+      "description": "Visit the Naivasha market for fresh produce and crafts.",
+      "location": "Naivasha, Kenya"
+    },
+    {
+      "day": 3,
+      "name": "Cultural Museum Tour",
+      "time": "14:00",
+      "description": "Explore local history and culture exhibits.",
+      "location": "Naivasha, Kenya"
+    },
+    {
+      "day": 3,
+      "name": "Sunset Boat Ride",
+      "time": "17:00",
+      "description": "Relax with a peaceful sunset boat ride.",
+      "location": "Naivasha, Kenya"
+    },
+    {
+      "day": 4,
+      "name": "Guided Hike on Mount Kenya",
+      "time": "08:00",
+      "description": "Hike with a guide to explore Mount Kenya trails.",
+      "location": "Mount Kenya, Kenya"
+    },
+    {
+      "day": 4,
+      "name": "Visit Local Market",
+      "time": "11:00",
+      "description": "Shop for local produce and crafts at market.",
+      "location": "Mount Kenya, Kenya"
+    },
+    {
+      "day": 4,
+      "name": "Cultural Museum Tour",
+      "time": "14:00",
+      "description": "Learn about the mountain region's culture and history.",
+      "location": "Mount Kenya, Kenya"
+    },
+    {
+      "day": 4,
+      "name": "Campfire Dinner & Storytelling",
+      "time": "17:00",
+      "description": "Enjoy a cozy evening with local tales and traditional music around a fire.",
+      "location": "Mount Kenya, Kenya"
+    },
+
+    {
+      "day": 5,
+      "name": "Beach Relaxation",
+      "time": "08:00",
+      "description": "Enjoy the morning on Diani Beach.",
+      "location": "Diani Beach, Kenya"
+    },
+    {
+      "day": 5,
+      "name": "Local Market Visit",
+      "time": "11:00",
+      "description": "Explore the beach town's local market.",
+      "location": "Diani Beach, Kenya"
+    },
+    {
+      "day": 5,
+      "name": "Cultural Museum Tour",
+      "time": "14:00",
+      "description": "Discover coastal culture and history.",
+      "location": "Diani Beach, Kenya"
+    },
+    {
+      "day": 5,
+      "name": "Sunset Boat Ride",
+      "time": "17:00",
+      "description": "End the day with a sunset boat cruise.",
+      "location": "Diani Beach, Kenya"
+    },
+    {
+      "day": 6,
+      "name": "Flight to Arusha",
+      "time": "08:00",
+      "description": "Morning flight to Arusha, Tanzania.",
+      "location": "Arusha, Tanzania"
+    },
+    {
+      "day": 6,
+      "name": "City Tour of Arusha",
+      "time": "10:00",
+      "description": "Explore Arusha's key landmarks with a guide.",
+      "location": "Arusha, Tanzania"
+    },
+    {
+      "day": 6,
+      "name": "Local Market Visit",
+      "time": "12:00",
+      "description": "Visit Arusha's bustling markets.",
+      "location": "Arusha, Tanzania"
+    },
+    {
+      "day": 6,
+      "name": "Cultural Museum Tour",
+      "time": "14:00",
+      "description": "Discover Tanzanian culture at a local museum.",
+      "location": "Arusha, Tanzania"
+    },
+    {
+      "day": 6,
+      "name": "A scenic viewpoint, not a trek",
+      "time": "17:00",
+      "description": "A scenic gateway to safari destinations.",
+      "location": "Arusha, Tanzania"
+    },
+    {
+      "day": 7,
+      "name": "Serengeti Game Drive",
+      "time": "08:00",
+      "description": "Morning game drive in Serengeti National Park.",
+      "location": "Serengeti, Tanzania"
+    },
+    {
+      "day": 7,
+      "name": "Local Market Visit",
+      "time": "11:00",
+      "description": "Explore nearby markets around Serengeti.",
+      "location": "Serengeti, Tanzania"
+    },
+    {
+      "day": 7,
+      "name": "Cultural Museum Tour",
+      "time": "14:00",
+      "description": "Visit local cultural sites.",
+      "location": "Serengeti, Tanzania"
+    },
+    {
+      "day": 7,
+      "name": "Sundowner in the Savannah",
+      "time": "17:00",
+      "description": "End the day with a sundowner.",
+      "location": "Serengeti, Tanzania"
+    },
+    {
+      "day": 8,
+      "name": "Ngorongoro Crater Tour",
+      "time": "08:00",
+      "description": "Full day tour of the Ngorongoro Crater.",
+      "location": "Ngorongoro Crater, Tanzania"
+    },
+    {
+      "day": 8,
+      "name": "Local Market Visit",
+      "time": "11:00",
+      "description": "Visit markets near Ngorongoro.",
+      "location": "Ngorongoro Crater, Tanzania"
+    },
+    {
+      "day": 8,
+      "name": "Cultural Museum Tour",
+      "time": "14:00",
+      "description": "Discover cultural heritage near the crater.",
+      "location": "Ngorongoro Crater, Tanzania"
+    },
+    {
+      "day": 8,
+      "name": "Crater Rim Walk at Sunset",
+      "time": "17:00",
+      "description": "Relax as you take a walk while viewing the sunset.",
+      "location": "Ngorongoro Crater, Tanzania"
+    },
+    {
+      "day": 9,
+      "name": "Zanzibar Island Tour",
+      "time": "08:00",
+      "description": "Explore Zanzibar's historic Stone Town.",
+      "location": "Zanzibar, Tanzania"
+    },
+    {
+      "day": 9,
+      "name": "Local Market Visit",
+      "time": "11:00",
+      "description": "Visit the local markets in Zanzibar.",
+      "location": "Zanzibar, Tanzania"
+    },
+    {
+      "day": 9,
+      "name": "Cultural Museum Tour",
+      "time": "14:00",
+      "description": "Learn about Zanzibar's culture and history.",
+      "location": "Zanzibar, Tanzania"
+    },
+    {
+      "day": 9,
+      "name": "Sunset Boat Ride",
+      "time": "17:00",
+      "description": "Enjoy a boat ride during sunset.",
+      "location": "Zanzibar, Tanzania"
+    },
+    {
+      "day": 10,
+      "name": "City Tour of Kampala",
+      "time": "08:00",
+      "description": "Guided tour of Uganda's capital city.",
+      "location": "Kampala, Uganda"
+    },
+    {
+      "day": 10,
+      "name": "Local Market Visit",
+      "time": "11:00",
+      "description": "Shop at Kampala's bustling markets.",
+      "location": "Kampala, Uganda"
+    },
+    {
+      "day": 10,
+      "name": "Cultural Museum Tour",
+      "time": "14:00",
+      "description": "Explore Ugandan culture and history.",
+      "location": "Kampala, Uganda"
+    },
+    {
+      "day": 10,
+      "name": "Sunset at Lake Victoria Shores with Dinner",
+      "time": "17:00",
+      "description": "Relax at the shores of Lake Victoria.",
+      "location": "Kampala, Uganda"
+    },
+    {
+      "day": 11,
+      "name": "Gorilla Trekking in Volcanoes National Park",
+      "time": "08:00",
+      "description": "Embark on a guided trek to observe mountain gorillas in their natural habitat.",
+      "location": "Volcanoes National Park, Rwanda"
+    },
+    {
+      "day": 11,
+      "name": "Visit to Iby’Iwacu Cultural Village",
+      "time": "14:00",
+      "description": "Experience traditional Rwandan culture through dance, music, and crafts.",
+      "location": "Musanze, Rwanda"
+    },
+    {
+      "day": 11,
+      "name": "Evening at Lake Kivu",
+      "time": "17:00",
+      "description": "Relax by the shores of Lake Kivu and enjoy the sunset.",
+      "location": "Gisenyi, Rwanda"
+    },
+    {
+      "day": 12,
+      "name": "Nyungwe Forest Canopy Walk",
+      "time": "08:00",
+      "description": "Walk across the canopy bridge for panoramic views of the rainforest.",
+      "location": "Nyungwe National Park, Rwanda"
+    },
+    {
+      "day": 12,
+      "name": "Chimpanzee Tracking",
+      "time": "11:00",
+      "description": "Track and observe chimpanzees in their natural environment.",
+      "location": "Nyungwe National Park, Rwanda"
+    },
+    {
+      "day": 12,
+      "name": "Tea Plantation Visit",
+      "time": "14:00",
+      "description": "Tour a local tea plantation and learn about tea processing.",
+      "location": "Gisakura, Rwanda"
+    },
+    {
+      "day": 12,
+      "name": "Cultural Performance",
+      "time": "17:00",
+      "description": "Enjoy traditional Rwandan music and dance performances.",
+      "location": "Gisakura, Rwanda"
+    },
+    {
+      "day": 13,
+      "name": "Gishora Drum Sanctuary Visit",
+      "time": "08:00",
+      "description": "Witness traditional drumming performances and learn about their cultural significance.",
+      "location": "Gitega, Burundi"
+    },
+    {
+      "day": 13,
+      "name": "Karera Waterfalls Exploration",
+      "time": "11:00",
+      "description": "Hike to the scenic Karera Waterfalls and enjoy the natural beauty.",
+      "location": "Rutana Province, Burundi"
+    },
+    {
+      "day": 13,
+      "name": "Gitega National Museum Tour",
+      "time": "14:00",
+      "description": "Explore Burundi's history and culture through museum exhibits.",
+      "location": "Gitega, Burundi"
+    },
+    {
+      "day": 13,
+      "name": "Lake Tanganyika Sunset Cruise",
+      "time": "17:00",
+      "description": "Relax on a boat ride and watch the sunset over Lake Tanganyika.",
+      "location": "Bujumbura, Burundi"
+    },
+    {
+      "day": 14,
+      "name": "Rock-Hewn Churches of Lalibela Tour",
+      "time": "08:00",
+      "description": "Discover the UNESCO World Heritage rock-hewn churches.",
+      "location": "Lalibela, Ethiopia"
+    },
+    {
+      "day": 14,
+      "name": "Local Market Visit",
+      "time": "11:00",
+      "description": "Explore the vibrant local markets of Lalibela.",
+      "location": "Lalibela, Ethiopia"
+    },
+    {
+      "day": 14,
+      "name": "Traditional Ethiopian Cooking Class",
+      "time": "14:00",
+      "description": "Learn to prepare traditional Ethiopian dishes.",
+      "location": "Lalibela, Ethiopia"
+    },
+    {
+      "day": 14,
+      "name": "Cultural Dance Performance",
+      "time": "17:00",
+      "description": "Enjoy a performance of traditional Ethiopian music and dance.",
+      "location": "Lalibela, Ethiopia"
+    },
+    {
+      "day": 15,
+      "name": "Simien Mountains National Park Hike",
+      "time": "08:00",
+      "description": "Hike through the dramatic landscapes of the Simien Mountains.",
+      "location": "Simien Mountains, Ethiopia"
+    },
+    {
+      "day": 15,
+      "name": "Wildlife Viewing",
+      "time": "11:00",
+      "description": "Observe endemic wildlife such as the Gelada baboon.",
+      "location": "Simien Mountains, Ethiopia"
+    },
+    {
+      "day": 15,
+      "name": "Picnic Lunch",
+      "time": "14:00",
+      "description": "Enjoy a picnic amidst the stunning mountain scenery.",
+      "location": "Simien Mountains, Ethiopia"
+    },
+    {
+      "day": 15,
+      "name": "Sunset Viewpoint",
+      "time": "17:00",
+      "description": "Watch the sunset from a panoramic viewpoint.",
+      "location": "Simien Mountains, Ethiopia"
+    },
+    {
+      "day": 16,
+      "name": "Addis Ababa City Tour",
+      "time": "08:00",
+      "description": "Explore the capital city of Ethiopia with a guided tour.",
+      "location": "Addis Ababa, Ethiopia"
+    },
+    {
+      "day": 16,
+      "name": "National Museum of Ethiopia Visit",
+      "time": "11:00",
+      "description": "Learn about Ethiopia's rich history and see Lucy's fossil.",
+      "location": "Addis Ababa, Ethiopia"
+    },
+    {
+      "day": 16,
+      "name": "Entoto Mountain Hike",
+      "time": "14:00",
+      "description": "Hike to the Entoto Mountains for panoramic views of Addis Ababa.",
+      "location": "Addis Ababa, Ethiopia"
+    },
+    {
+      "day": 16,
+      "name": "Farewell Dinner",
+      "time": "17:00",
+      "description": "Enjoy a farewell dinner with traditional Ethiopian cuisine.",
+      "location": "Addis Ababa, Ethiopia"
+    },
+    {
+      "day": 17,
+      "name": "Departure",
+      "time": "08:00",
+      "description": "Transfer to the airport for departure.",
+      "location": "Addis Ababa, Ethiopia"
+    },
+    {
+      "day": 17,
+      "name": "End of Tour",
+      "time": "10:00",
+      "description": "Tour concludes, and guests depart.",
+      "location": "Addis Ababa, Ethiopia"
+    },
+    {
+      "day": 18,
+      "name": "Optional Extension: Safari in Serengeti",
+      "time": "08:00",
+      "description": "Optional extension for an additional safari experience in Serengeti.",
+      "location": "Serengeti, Tanzania"
+    },
+    {
+      "day": 18,
+      "name": "Optional Extension: Relaxation in Zanzibar",
+      "time": "11:00",
+      "description": "Optional extension for relaxation on the beaches of Zanzibar.",
+      "location": "Zanzibar, Tanzania"
+    },
+    {
+      "day": 18,
+      "name": "Optional Extension: Cultural Tour in Zanzibar",
+      "time": "14:00",
+      "description": "Optional extension for a cultural tour in Zanzibar.",
+      "location": "Zanzibar, Tanzania"
+    },
+    {
+      "day": 18,
+      "name": "Optional Extension: Departure from Zanzibar",
+      "time": "17:00",
+      "description": "End of optional extension, guests depart from Zanzibar.",
+      "location": "Zanzibar, Tanzania"
+    },
+    {
+      "day": 19,
+      "name": "Optional Extension: Wildlife Safari in Maasai Mara",
+      "time": "08:00",
+      "description": "Optional extension for a wildlife safari in Maasai Mara.",
+      "location": "Maasai Mara, Kenya"
+    },
+    {
+      "day": 19,
+      "name": "Optional Extension: Cultural Experience in Maasai Village",
+      "time": "11:00",
+      "description": "Optional extension for a cultural experience in a Maasai village.",
+      "location": "Maasai Mara, Kenya"
+    },
+    {
+      "day": 19,
+      "name": "Optional Extension: Relaxation at Lake Naivasha",
+      "time": "14:00",
+      "description": "Optional extension for relaxation at Lake Naivasha.",
+      "location": "Lake Naivasha, Kenya"
+    },
+    {
+      "day": 19,
+      "name": "Optional Extension: Departure from Nairobi",
+      "time": "17:00",
+      "description": "End of optional extension, guests depart from Nairobi.",
+      "location": "Nairobi, Kenya"
+    },
+    {
+      "day": 20,
+      "name": "Optional Extension: Cultural Tour in Kampala",
+      "time": "08:00",
+      "description": "Optional extension for a cultural tour in Kampala, Uganda.",
+      "location": "Kampala, Uganda"
+    },
+    {
+      "day": 20,
+      "name": "Optional Extension: Wildlife Safari in Queen Elizabeth National Park",
+      "time": "11:00",
+      "description": "Optional extension for a wildlife safari in Queen Elizabeth National Park.",
+      "location": "Queen Elizabeth National Park, Uganda"
+    },
+    {
+      "day": 20,
+      "name": "Optional Extension: Relaxation at Lake Bunyonyi",
+      "time": "14:00",
+      "description": "Optional extension for relaxation at Lake Bunyonyi.",
+      "location": "Lake Bunyonyi, Uganda"
+    },
+    {
+      "day": 20,
+      "name": "Optional Extension: Departure from Entebbe",
+      "time": "17:00",
+      "description": "End of optional extension, guests depart from Entebbe.",
+      "location": "Entebbe, Uganda"
+    }
+  ]
+}
