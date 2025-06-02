@@ -22,7 +22,7 @@ const HomePage = () => {
           <div className="card">
             <h2>Vote on Activities</h2>
             <p>Suggest and vote on trip activities</p>
-            <Link to="/itinerary" style={{ backgroundColor: '#1a4dab', color: 'white' }} className='button'>Suggest Activity</Link>
+            <Link to="/trip-activities-demo" style={{ backgroundColor: '#1a4dab', color: 'white' }} className='button'>Suggest Activity</Link>
           </div>
         </div>
       </div>
