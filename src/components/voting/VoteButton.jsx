@@ -1,15 +1,19 @@
-// src/components/voting/VoteButton.jsx
-import React, { useState, useEffect } from 'react';
-// Optional: Create and import VoteButton.css if you prefer external styles
-// import './VoteButton.css';
 
-// Mock API calls (replace with real API later)
+import React, { useState, useEffect } from 'react';
+
+
+// Mock API calls
 const mockRecordVoteApi = async (activityId, /* userId */) => {
     console.log(`MOCK API: Voted for activity ${activityId}`);
     await new Promise(resolve => setTimeout(resolve, 300));
     return { success: true };
 };
+    return { success: true };
+};
 
+const mockUnvoteApi = async (activityId, /* userId */) => {
+    console.log(`MOCK API: Unvoted for activity ${activityId}`);
+    await new Promise(resolve => setTimeout(resolve, 300));
 const mockUnvoteApi = async (activityId, /* userId */) => {
     console.log(`MOCK API: Unvoted for activity ${activityId}`);
     await new Promise(resolve => setTimeout(resolve, 300));
@@ -20,22 +24,26 @@ const VoteButton = ({ activityId, initialVotes = 0 }) => {
     const [voteCount, setVoteCount] = useState(initialVotes);
     const [isLoading, setIsLoading] = useState(false);
     const [hasVoted, setHasVoted] = useState(false); // Renamed for clarity
+    const [hasVoted, setHasVoted] = useState(false); // Renamed for clarity
     const [error, setError] = useState(null);
 
     useEffect(() => {
         setVoteCount(initialVotes);
+
     }, [initialVotes]);
 
     const handleVoteToggle = async () => {
+    const handleVoteToggle = async () => {
         setIsLoading(true);
         setError(null);
+
 
         try {
             if (hasVoted) {
                 // --- Handle Unvote ---
                 const response = await mockUnvoteApi(activityId /*, 'mockUserId123' */);
                 if (response.success) {
-                    setVoteCount(prevCount => Math.max(0, prevCount - 1));
+                    setVoteCount(prevCount => Math.max(0, prevCount - 1)); // Ensure votes don't go negative
                     setHasVoted(false);
                 } else {
                     throw new Error("Unvote failed (mock response)");
@@ -53,11 +61,13 @@ const VoteButton = ({ activityId, initialVotes = 0 }) => {
         } catch (err) {
             console.error("Error voting/unvoting:", err);
             setError(err.message || "Failed to process vote.");
+
         } finally {
             setIsLoading(false);
         }
     };
 
+    // --- Styling ---
     const buttonStyle = {
         padding: '8px 15px',
         margin: '5px 0',
@@ -70,22 +80,23 @@ const VoteButton = ({ activityId, initialVotes = 0 }) => {
 
     const defaultButtonStyle = {
         ...buttonStyle,
-        backgroundColor: '#007bff',
+        backgroundColor: '#007bff', // Blue
         color: 'white',
     };
 
     const votedButtonStyle = {
         ...buttonStyle,
-        backgroundColor: '#28a745',
+        backgroundColor: '#28a745', // Green
         color: 'white',
     };
 
     const loadingButtonStyle = {
         ...buttonStyle,
-        backgroundColor: '#6c757d',
+        backgroundColor: '#6c757d', // Grey
         color: 'white',
         cursor: 'not-allowed',
     };
+
 
     return (
         <div className="vote-button-container" style={{ marginTop: '10px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
@@ -97,7 +108,7 @@ const VoteButton = ({ activityId, initialVotes = 0 }) => {
                 {isLoading
                     ? 'Processing...'
                     : hasVoted
-                        ? `Unvote (${voteCount})`
+                        ? `Unvote (${voteCount})` // Text changes to Unvote
                         : `Vote (${voteCount})`}
             </button>
             {error && <p style={{ color: 'red', fontSize: '0.8em', margin: '5px 0 0 0' }}>{error}</p>}
