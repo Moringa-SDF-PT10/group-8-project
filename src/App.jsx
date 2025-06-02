@@ -129,6 +129,7 @@ function App() {
               />
             </ProtectedRoute>
           } />
+<<<<<<< HEAD
 
           <Route path="/joined-trips" element={
             <JoinedTripsPage 
@@ -151,6 +152,15 @@ function App() {
             </ProtectedRoute>
           } />
 
+=======
+          <Route path="/trips/:tripId/itinerary" element={
+             <ProtectedRoute>
+               <div className="page-content">
+                 <Itinerary />
+               </div>
+           </ProtectedRoute>
+         } />
+>>>>>>> feature/Itinerary-logic
           <Route path="/bookings" element={
             <ProtectedRoute>
               <div className="page-content">Bookings Page</div>
